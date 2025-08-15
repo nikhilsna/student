@@ -1,6 +1,6 @@
 ---
 layout: base
-title: I'm [Ahaan Vaidyanathan]
+title: Home
 hide: true
 ---
 
