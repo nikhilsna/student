@@ -4,16 +4,16 @@ title: I'm [Ahaan Vaidyanathan]
 hide: true
 ---
 
-### Me and Team
+# Team
 
-Hi! My name is Ahaan Vaidyanathan.
-
-| Role         | Name     | Repo Location                       | Stream                | Repo Name |
-|--------------|----------|-------------------------------------|-----------------------|-----------|
-| Scrum Master | Ahaan   | github.com/Ahaanv19/student          | upstream (OCS fork)   | student   |
-| Scrummer     | Nikhil   | github.com/torin/student            | downstream (fork)     | student   |
-| Scrummer     | Arnav | github.com/avantika/student         | downstream (fork)     | student   |
-| Scrummer     | Xavier    | github.com/aaadit/student           | downstream (fork)     | student   |
+| Role         | Name   | Repo Location | Stream | Repo Name |
+|--------------|--------|---------------|--------|-----------|
+| Scrum Master | Ahaan  |               |        |           |
+| Scrummer     | Arnav  |               |        |           |
+| Scrummer     | Nikhil |               |        |           |
+| Scrummer     | Nora   |               |        |           |
+| Scrummer     | Soni   |               |        |           |
+| Scrummer     | Xavier |               |        |           |
 
 
 ## Links to Learning
