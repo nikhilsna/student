@@ -4,7 +4,7 @@ title: I'm [Ahaan Vaidyanathan]
 hide: true
 ---
 
-Hi! My name is John Mortensen
+Hi! My name is Ahaan Vaidyanathan
 
 ### Development Environment
 
