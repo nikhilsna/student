@@ -11,8 +11,6 @@ hide: true
 | Scrum Master | Ahaan  |               |        |           |
 | Scrummer     | Arnav  |               |        |           |
 | Scrummer     | Nikhil |               |        |           |
-| Scrummer     | Nora   |               |        |           |
-| Scrummer     | Soni   |               |        |           |
 | Scrummer     | Xavier |               |        |           |
 
 
