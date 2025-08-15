@@ -6,13 +6,52 @@ hide: true
 
 # Team
 
-| Role         | Name    | Repo Location | Stream | Repo Name |
-|--------------|---------|---------------|--------|-----------|
-| Scrum Master | Ahaan   |               |        |           |
-| Scrummer     | Arnav   |               |        |           |
-| Scrummer     | Nikhil  |               |        |           |
-| Scrummer     | Spencer |               |        |           |
-| Scrummer     | Xavier  |               |        |           |
+<table>
+    <!--Table Headers-->
+    <tr>
+        <th>Role</th>
+        <th>Name</th>
+        <th>Repo Location</th>
+        <th>Stream</th>
+        <th>Repo Name</th>
+    </tr>
+    <!--Table Data-->
+    <tr>
+        <td>Scrum Master</td>
+        <td>Ahaan</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Scrummer</td>
+        <td>Arnav</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Scrummer</td>
+        <td>Nikhil</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Scrummer</td>
+        <td>Spencer</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Scrummer</td>
+        <td>Xavier</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
 
 
 ## Links to Learning
