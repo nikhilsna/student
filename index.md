@@ -10,10 +10,10 @@ Hi! My name is Ahaan Vaidyanathan.
 
 | Role         | Name     | Repo Location                       | Stream                | Repo Name |
 |--------------|----------|-------------------------------------|-----------------------|-----------|
-| Scrum Master | John     | github.com/jm1021/student           | upstream (OCS fork)   | student   |
-| Scrummer     | Torin    | github.com/torin/student            | downstream (fork)     | student   |
-| Scrummer     | Avantika | github.com/avantika/student         | downstream (fork)     | student   |
-| Scrummer     | Aadit    | github.com/aaadit/student           | downstream (fork)     | student   |
+| Scrum Master | Ahaan   | github.com/Ahaanv19/student          | upstream (OCS fork)   | student   |
+| Scrummer     | Nikhil   | github.com/torin/student            | downstream (fork)     | student   |
+| Scrummer     | Arnav | github.com/avantika/student         | downstream (fork)     | student   |
+| Scrummer     | Xavier    | github.com/aaadit/student           | downstream (fork)     | student   |
 
 
 ## Links to Learning
