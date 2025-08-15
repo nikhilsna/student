@@ -6,14 +6,13 @@ hide: true
 
 # Team
 
-| Role         | Name   | Repo Location | Stream | Repo Name |
-|--------------|--------|---------------|--------|-----------|
-| Scrum Master | Ahaan  |               |        |           |
-| Scrummer     | Arnav  |               |        |           |
-| Scrummer     | Nikhil |               |        |           |
-| Scrummer     | Nora   |               |        |           |
-| Scrummer     | Soni   |               |        |           |
-| Scrummer     | Xavier |               |        |           |
+| Role         | Name    | Repo Location | Stream | Repo Name |
+|--------------|---------|---------------|--------|-----------|
+| Scrum Master | Ahaan   |               |        |           |
+| Scrummer     | Arnav   |               |        |           |
+| Scrummer     | Nikhil  |               |        |           |
+| Scrummer     | Spencer |               |        |           |
+| Scrummer     | Xavier  |               |        |           |
 
 
 ## Links to Learning
