@@ -4,7 +4,7 @@ title: Home
 hide: true
 ---
 
-# Team
+## Team Overview
 
 <table>
     <!--Table Headers-->
@@ -20,36 +20,36 @@ hide: true
         <td>Scrum Master</td>
         <td>Ahaan</td>
         <td></td>
-        <td></td>
+        <td>downstream</td>
         <td></td>
     </tr>
     <tr>
         <td>Scrummer</td>
         <td>Arnav</td>
         <td></td>
-        <td></td>
+        <td>downstream</td>
         <td></td>
     </tr>
     <tr>
         <td>Scrummer</td>
         <td>Nikhil</td>
         <td></td>
-        <td></td>
+        <td>downstream</td>
         <td></td>
     </tr>
     <tr>
         <td>Scrummer</td>
         <td>Spencer</td>
         <td></td>
-        <td></td>
+        <td>downstream</td>
         <td></td>
     </tr>
     <tr>
         <td>Scrummer</td>
         <td>Xavier</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><a href="https://github.com/XavierTho/student">https://github.com/XavierTho/student</a></td>
+        <td>downstream</td>
+        <td>student</td>
     </tr>
 </table>
 
