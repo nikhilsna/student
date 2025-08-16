@@ -19,14 +19,14 @@ hide: true
     <tr>
         <td>Scrum Master</td>
         <td>Ahaan</td>
-        <td><a href="https://github.com/Ahaanv19/student">https://github.com/Ahaanv19/student</a></td>
+        <td><a href="https://github.com/Ahaanv19/student">github.com/Ahaanv19/student</a></td>
         <td>downstream</td>
         <td>student</td>
     </tr>
     <tr>
         <td>Scrummer</td>
         <td>Arnav</td>
-        <td><a href="https://github.com/Arnav210/Arnav_2026">https://github.com/Arnav210/Arnav_2026</a></td>
+        <td><a href="https://github.com/Arnav210/Arnav_2026">github.com/Arnav210/Arnav_2026</a></td>
         <td>downstream</td>
         <td>Arnav_2026</td>
     </tr>
@@ -47,7 +47,7 @@ hide: true
     <tr>
         <td>Scrummer</td>
         <td>Xavier</td>
-        <td><a href="https://github.com/XavierTho/student">https://github.com/XavierTho/student</a></td>
+        <td><a href="https://github.com/XavierTho/student">github.com/XavierTho/student</a></td>
         <td>downstream</td>
         <td>student</td>
     </tr>
