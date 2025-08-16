@@ -19,9 +19,9 @@ hide: true
     <tr>
         <td>Scrum Master</td>
         <td>Ahaan</td>
-        <td></td>
+        <td>https://github.com/Ahaanv19/student</td>
         <td>downstream</td>
-        <td></td>
+        <td>student</td>
     </tr>
     <tr>
         <td>Scrummer</td>
