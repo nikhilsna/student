@@ -19,7 +19,7 @@ hide: true
     <tr>
         <td>Scrum Master</td>
         <td>Ahaan</td>
-        <td>https://github.com/Ahaanv19/student</td>
+        <td><a href="https://github.com/Ahaanv19/student">https://github.com/Ahaanv19/student</a></td>
         <td>downstream</td>
         <td>student</td>
     </tr>
