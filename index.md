@@ -53,6 +53,15 @@ hide: true
     </tr>
 </table>
 
+## Links to Current Projects
+
+
+<h3>
+    <a href="{{site.baseurl}}/computer-clicker/">
+        Clicker Game
+    </a>
+</h3>
+
 
 ## Links to Learning
 
