@@ -19,14 +19,14 @@ hide: true
     <tr>
         <td>Scrum Master</td>
         <td>Ahaan</td>
-        <td><a href="https://github.com/Ahaanv19/student">github.com/Ahaanv19/student</a></td>
+        <td><a href="https://github.com/Ahaanv19/student" target="_blank">github.com/Ahaanv19/student</a></td>
         <td>downstream</td>
         <td>student</td>
     </tr>
     <tr>
         <td>Scrummer</td>
         <td>Arnav</td>
-        <td><a href="https://github.com/Arnav210/Arnav_2026">github.com/Arnav210/Arnav_2026</a></td>
+        <td><a href="https://github.com/Arnav210/Arnav_2026" target="_blank">github.com/Arnav210/Arnav_2026</a></td>
         <td>downstream</td>
         <td>Arnav_2026</td>
     </tr>
@@ -47,11 +47,20 @@ hide: true
     <tr>
         <td>Scrummer</td>
         <td>Xavier</td>
-        <td><a href="https://github.com/XavierTho/student">github.com/XavierTho/student</a></td>
+        <td><a href="https://github.com/XavierTho/student" target="_blank">github.com/XavierTho/student</a></td>
         <td>downstream</td>
         <td>student</td>
     </tr>
 </table>
+
+## Links to Current Projects
+
+
+<h3>
+    <a href="{{site.baseurl}}/computer-clicker/">
+        Clicker Game
+    </a>
+</h3>
 
 
 ## Links to Learning
@@ -74,21 +83,3 @@ hide: true
 </a>
 
 <br>
-
-### Class Progress
-
-<a href="{{site.baseurl}}/snake" class="button small" style="background-color: #6b4bd3ff">
-    Snake Game
-</a>
-<a href="{{site.baseurl}}/turtle" class="button small" style="background-color: #2A7DB1">
-    <span style="color: #000000">Turtle</span>
-</a>
-
-<br>
-
-<!-- Contact Section -->
-### Get in Touch
-
-> Feel free to reach out if you'd like to collaborate or learn more about our work.
-
-<p style="color: #2A7DB1;">Open Coding Society: <a href="https://opencodingsociety.com" style="color: #2A7DB1; text-decoration: underline;">Socials</a></p>
