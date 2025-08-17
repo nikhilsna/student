@@ -27,35 +27,46 @@ permalink: /computer-clicker/
 <button onclick="buyMinion()">
     Buy Minion
 </button>
+<p id="minion-cost">Cost of Minion: 10</p>
 
 <p id="total-minions">Total Minions: 0</p>
 
 <script>
-    totalClicks = 0;
+    let totalClicks = 0;
 
     // Upgrades go here
-    minion = 0;
+    let minion = 0;
+    let minionCost = 10
 
     // Add to total clicks
     function processClick() {
         totalClicks++
-        // console.log(totalClicks)
     };
 
     function buyMinion() {
-        minion++
-        document.getElementById("total-minions").innerHTML = `Total Minions: ${minion}`
+        if (totalClicks >= minionCost) {
+            minion++;
+            totalClicks -= minionCost;
+            minionCost += (minion * minion)
+            document.getElementById("total-minions").innerHTML = `Total Minions: ${minion}`;
+            document.getElementById("minion-cost").innerHTML = `Cost of Minion: ${minionCost}`;
+            
+        } else {
+            alert("You don't have enough for this!");
+        }
+
+        
     }
 
     function applyUpgrades() {
-        totalClicks += minion
+        totalClicks += minion;
         
     }
 
     function updateTotalClicks() {
-        document.getElementById("total-clicks").innerHTML = `Total Clicks: ${totalClicks}`
+        document.getElementById("total-clicks").innerHTML = `Total Clicks: ${totalClicks}`;
     }
 
-    setInterval(applyUpgrades, 1000)
-    setInterval(updateTotalClicks, 10)
+    setInterval(applyUpgrades, 1000);
+    setInterval(updateTotalClicks, 10);
 </script>
