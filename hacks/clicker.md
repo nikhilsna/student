@@ -25,14 +25,28 @@ permalink: /computer-clicker/
 <button onclick="buyUpgrade('billy')">Buy Billy</button>
 <button onclick="buyUpgrade('robot')">Buy Robot</button>
 
-<p id="minion-cost">Cost of Minion: 10 coins</p>
-<p id="total-minions">Total Minions: 0</p>
-
-<p id="billy-cost">Cost of Billy: 100 coins</p>
-<p id="total-billies">Total Billies: 0</p>
-
-<p id="robot-cost">Cost of Robot: 500 coins</p>
-<p id="total-robots">Total Robots: 0</p>
+<table>
+    <tr>
+        <th>Upgrade</th>
+        <th>Cost</th>
+        <th>Total Amount</th>
+    </tr>
+    <tr>
+        <td>Minion</td>
+        <td id="minion-cost">10</td>
+        <td id="total-minions">0</td>
+    </tr>
+    <tr>
+        <td>Billy</td>
+        <td id="billy-cost">100</td>
+        <td id="total-billies">0</td>
+    </tr>
+    <tr>
+        <td>Robot</td>
+        <td id="robot-cost">500</td>
+        <td id="total-robots">0</td>
+    </tr>
+</table>
 
 <script>
     let totalCoins = 0;
@@ -66,8 +80,8 @@ permalink: /computer-clicker/
                     minionCost = 10 + (minion * minion)
 
                     // Update HTML Displays
-                    document.getElementById("total-minions").innerHTML = `Total Minions: ${minion}`;
-                    document.getElementById("minion-cost").innerHTML = `Cost of Minion: ${minionCost} coins`;
+                    document.getElementById("total-minions").innerHTML = `${minion}`;
+                    document.getElementById("minion-cost").innerHTML = `${minionCost}`;
                 }  
                 break;
 
@@ -83,8 +97,8 @@ permalink: /computer-clicker/
                     billyCost = 100 + (billy * billy * billy)
 
                     // Update HTML Displays
-                    document.getElementById("total-billies").innerHTML = `Total Billies: ${billy}`;
-                    document.getElementById("billy-cost").innerHTML = `Cost of Billy: ${billyCost} coins`;
+                    document.getElementById("total-billies").innerHTML = `${billy}`;
+                    document.getElementById("billy-cost").innerHTML = `${billyCost}`;
                 }
                 break;
 
@@ -100,8 +114,8 @@ permalink: /computer-clicker/
                     robotCost = 500 + (robot * robot * robot * robot)
 
                     // Update HTML Displays
-                    document.getElementById("total-robots").innerHTML = `Total Robots: ${robot}`;
-                    document.getElementById("robot-cost").innerHTML = `Cost of Robot: ${robotCost} coins`;
+                    document.getElementById("total-robots").innerHTML = `${robot}`;
+                    document.getElementById("robot-cost").innerHTML = `${robotCost}`;
                 }
                 break;
         }
