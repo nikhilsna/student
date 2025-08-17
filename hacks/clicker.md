@@ -31,11 +31,11 @@ permalink: /computer-clicker/
 
     // Upgrades go here
     let minion = 0;
-    let minionCost = 10
+    let minionCost = 0;
 
     // Add to total clicks
     function processClick() {
-        totalClicks++
+        totalClicks++;
     };
 
     function buyMinion() {
@@ -47,7 +47,7 @@ permalink: /computer-clicker/
             totalClicks -= minionCost;
 
             // Increase minion cost
-            minionCost += (minion * minion)
+            minionCost = 10 + (minion * minion)
 
             // Update HTML Displays
             document.getElementById("total-minions").innerHTML = `Total Minions: ${minion}`;
