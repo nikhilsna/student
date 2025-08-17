@@ -57,7 +57,7 @@ hide: true
 
 
 <h3>
-    <a href="{{site.baseurl}}/computer-clicker/">
+    <a href="{{site.baseurl}}/clicker/" target="_blank">
         Clicker Game
     </a>
 </h3>

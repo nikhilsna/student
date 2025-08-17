@@ -1,7 +1,7 @@
 ---
 layout: base
 title: Clicker
-permalink: /computer-clicker/
+permalink: /clicker/
 ---
 
 ## Clicker Game
