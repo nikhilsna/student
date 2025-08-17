@@ -1,10 +1,11 @@
 ---
 layout: base
-title: Computer Clicker
+title: Clicker
 permalink: /computer-clicker/
 ---
 
-## Computer Clicker
+## Clicker Game
+
 <style>
     .clicker {
         width: 200px;
@@ -18,40 +19,40 @@ permalink: /computer-clicker/
 <!-- Clicker Button-->
 <button onclick="processClick()" class="clicker">Click Here</button>
 
-<p id="total-clicks">Total Clicks: 0</p>
+<p id="total-coins">Total Coins: 0</p>
 
 <!--Info on Minions -->
 <button onclick="buyMinion()">Buy Minion</button>
 
-<p id="minion-cost">Cost of Minion: 10</p>
+<p id="minion-cost">Cost of Minion: 10 coins</p>
 <p id="total-minions">Total Minions: 0</p>
 
 <script>
-    let totalClicks = 0;
+    let totalCoins = 0;
 
     // Upgrades go here
     let minion = 0;
-    let minionCost = 0;
+    let minionCost = 10;
 
-    // Add to total clicks
+    // Add to total coins
     function processClick() {
-        totalClicks++;
+        totalCoins++;
     };
 
     function buyMinion() {
-        if (totalClicks >= minionCost) {
+        if (totalCoins >= minionCost) {
             // Add a minion
             minion++;
 
             // Subtract Clicks from cost
-            totalClicks -= minionCost;
+            totalCoins -= minionCost;
 
             // Increase minion cost
             minionCost = 10 + (minion * minion)
 
             // Update HTML Displays
             document.getElementById("total-minions").innerHTML = `Total Minions: ${minion}`;
-            document.getElementById("minion-cost").innerHTML = `Cost of Minion: ${minionCost}`;
+            document.getElementById("minion-cost").innerHTML = `Cost of Minion: ${minionCost} coins`;
             
         } else {
             alert("You don't have enough for this!");
@@ -59,13 +60,13 @@ permalink: /computer-clicker/
     }
 
     function applyUpgrades() {
-        totalClicks += minion;
+        totalCoins += minion;
     }
 
-    function updateTotalClicks() {
-        document.getElementById("total-clicks").innerHTML = `Total Clicks: ${totalClicks}`;
+    function updateTotalCoins() {
+        document.getElementById("total-coins").innerHTML = `Total Coins: ${totalCoins}`;
     }
 
     setInterval(applyUpgrades, 1000);
-    setInterval(updateTotalClicks, 10);
+    setInterval(updateTotalCoins, 10);
 </script>
