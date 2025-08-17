@@ -136,15 +136,15 @@ permalink: /clicker/
     }
 
     function applyUpgrades() {
-        totalCoins += minion;
-        totalCoins += billy * 3;
-        totalCoins += robot * 5;
+        totalCoins += minion * 0.1;
+        totalCoins += billy * 0.3;
+        totalCoins += robot * 0.5;
     }
 
     function updateTotalCoins() {
-        document.getElementById("total-coins").innerHTML = `Total Coins: ${totalCoins}`;
+        document.getElementById("total-coins").innerHTML = `Total Coins: ${totalCoins.toFixed(1)}`;
     }
 
-    setInterval(applyUpgrades, 1000);
+    setInterval(applyUpgrades, 100);
     setInterval(updateTotalCoins, 10);
 </script>
