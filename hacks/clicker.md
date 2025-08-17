@@ -1,38 +1,66 @@
 ---
 layout: base
 title: Clicker
-permalink: /computer-clicker/
+permalink: /clicker/
 ---
 
 ## Clicker Game
 
 <style>
     .clicker {
-        width: 200px;
+        width: 800px;
         height: 200px;
         color: white;
+        font-size: 30px;
         border-radius: 5px;
         box-shadow: 1px 1px 1px grey;
+    }
+    .coin-counter {
+        color: white;
+        font-size: 20px;
+        text-align: center;
+    }
+    .upgrade-button {
+        width: 100px;
+        height: 50px;
+        color: white;
+        border-radius: 3px;
+        position: relative;
+        left: 31%;
     }
 </style>
 
 <!-- Clicker Button-->
 <button onclick="processClick()" class="clicker">Click Here</button>
 
-<p id="total-coins">Total Coins: 0</p>
+<p id="total-coins" class="coin-counter">Total Coins: 0</p>
 
-<button onclick="buyUpgrade('minion')">Buy Minion</button>
-<button onclick="buyUpgrade('billy')">Buy Billy</button>
-<button onclick="buyUpgrade('robot')">Buy Robot</button>
+<button onclick="buyUpgrade('minion')" class="upgrade-button">Buy Minion</button>
+<button onclick="buyUpgrade('billy')" class="upgrade-button">Buy Billy</button>
+<button onclick="buyUpgrade('robot')" class="upgrade-button">Buy Robot</button>
 
-<p id="minion-cost">Cost of Minion: 10 coins</p>
-<p id="total-minions">Total Minions: 0</p>
-
-<p id="billy-cost">Cost of Billy: 100 coins</p>
-<p id="total-billies">Total Billies: 0</p>
-
-<p id="robot-cost">Cost of Robot: 500 coins</p>
-<p id="total-robots">Total Robots: 0</p>
+<table>
+    <tr>
+        <th>Upgrade</th>
+        <th>Cost</th>
+        <th>Total Amount</th>
+    </tr>
+    <tr>
+        <td>Minion</td>
+        <td id="minion-cost">10</td>
+        <td id="total-minions">0</td>
+    </tr>
+    <tr>
+        <td>Billy</td>
+        <td id="billy-cost">100</td>
+        <td id="total-billies">0</td>
+    </tr>
+    <tr>
+        <td>Robot</td>
+        <td id="robot-cost">500</td>
+        <td id="total-robots">0</td>
+    </tr>
+</table>
 
 <script>
     let totalCoins = 0;
@@ -66,8 +94,8 @@ permalink: /computer-clicker/
                     minionCost = 10 + (minion * minion)
 
                     // Update HTML Displays
-                    document.getElementById("total-minions").innerHTML = `Total Minions: ${minion}`;
-                    document.getElementById("minion-cost").innerHTML = `Cost of Minion: ${minionCost} coins`;
+                    document.getElementById("total-minions").innerHTML = `${minion}`;
+                    document.getElementById("minion-cost").innerHTML = `${minionCost}`;
                 }  
                 break;
 
@@ -83,8 +111,8 @@ permalink: /computer-clicker/
                     billyCost = 100 + (billy * billy * billy)
 
                     // Update HTML Displays
-                    document.getElementById("total-billies").innerHTML = `Total Billies: ${billy}`;
-                    document.getElementById("billy-cost").innerHTML = `Cost of Billy: ${billyCost} coins`;
+                    document.getElementById("total-billies").innerHTML = `${billy}`;
+                    document.getElementById("billy-cost").innerHTML = `${billyCost}`;
                 }
                 break;
 
@@ -100,23 +128,23 @@ permalink: /computer-clicker/
                     robotCost = 500 + (robot * robot * robot * robot)
 
                     // Update HTML Displays
-                    document.getElementById("total-robots").innerHTML = `Total Robots: ${robot}`;
-                    document.getElementById("robot-cost").innerHTML = `Cost of Robot: ${robotCost} coins`;
+                    document.getElementById("total-robots").innerHTML = `${robot}`;
+                    document.getElementById("robot-cost").innerHTML = `${robotCost}`;
                 }
                 break;
         }
     }
 
     function applyUpgrades() {
-        totalCoins += minion;
-        totalCoins += billy * 3;
-        totalCoins += robot * 5;
+        totalCoins += minion * 0.1;
+        totalCoins += billy * 0.3;
+        totalCoins += robot * 0.5;
     }
 
     function updateTotalCoins() {
-        document.getElementById("total-coins").innerHTML = `Total Coins: ${totalCoins}`;
+        document.getElementById("total-coins").innerHTML = `Total Coins: ${totalCoins.toFixed(1)}`;
     }
 
-    setInterval(applyUpgrades, 1000);
+    setInterval(applyUpgrades, 100);
     setInterval(updateTotalCoins, 10);
 </script>
