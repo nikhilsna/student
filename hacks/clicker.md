@@ -7,32 +7,31 @@ permalink: /clicker/
 ## Clicker Game
 
 <style>
+    button {
+        background-color: grey;
+        color: black;
+        border-radius: 5px;
+    }
+
     .clicker {
         width: 800px;
         height: 200px;
-        color: white;
         font-size: 30px;
-        border-radius: 5px;
-        box-shadow: 1px 1px 1px grey;
+        box-shadow: 1px 1px 1px white;
     }
     .coin-counter {
-        color: white;
         font-size: 20px;
         text-align: center;
     }
     .upgrade-button {
         width: 100px;
         height: 50px;
-        color: white;
-        border-radius: 3px;
         position: relative;
         left: 31%;
     }
     .restart-button {
         width: 100px;
         height: 50px;
-        color: white;
-        border-radius: 3px;
         position: relative;
         left: 45%;
     }
