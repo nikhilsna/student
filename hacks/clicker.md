@@ -9,26 +9,21 @@ permalink: /computer-clicker/
     .clicker {
         width: 200px;
         height: 200px;
-        color: blue;
+        color: white;
         border-radius: 5px;
-        box-shadow: 5px 5px 5px red
+        box-shadow: 1px 1px 1px grey;
     }
 </style>
 
-
-<button onclick="processClick()" class="clicker">
-    Test
-</button>
+<!-- Clicker Button-->
+<button onclick="processClick()" class="clicker">Click Here</button>
 
 <p id="total-clicks">Total Clicks: 0</p>
 
-<p>Get a minion worker:</p>
+<!--Info on Minions -->
+<button onclick="buyMinion()">Buy Minion</button>
 
-<button onclick="buyMinion()">
-    Buy Minion
-</button>
 <p id="minion-cost">Cost of Minion: 10</p>
-
 <p id="total-minions">Total Minions: 0</p>
 
 <script>
@@ -45,22 +40,26 @@ permalink: /computer-clicker/
 
     function buyMinion() {
         if (totalClicks >= minionCost) {
+            // Add a minion
             minion++;
+
+            // Subtract Clicks from cost
             totalClicks -= minionCost;
+
+            // Increase minion cost
             minionCost += (minion * minion)
+
+            // Update HTML Displays
             document.getElementById("total-minions").innerHTML = `Total Minions: ${minion}`;
             document.getElementById("minion-cost").innerHTML = `Cost of Minion: ${minionCost}`;
             
         } else {
             alert("You don't have enough for this!");
         }
-
-        
     }
 
     function applyUpgrades() {
         totalClicks += minion;
-        
     }
 
     function updateTotalClicks() {
