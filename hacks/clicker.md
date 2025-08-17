@@ -8,22 +8,36 @@ permalink: /computer-clicker/
 
 <style>
     .clicker {
-        width: 200px;
+        width: 800px;
         height: 200px;
         color: white;
+        font-size: 30px;
         border-radius: 5px;
         box-shadow: 1px 1px 1px grey;
+    }
+    .coin-counter {
+        color: white;
+        font-size: 20px;
+        text-align: center;
+    }
+    .upgrade-button {
+        width: 100px;
+        height: 50px;
+        color: white;
+        border-radius: 3px;
+        position: relative;
+        left: 31%;
     }
 </style>
 
 <!-- Clicker Button-->
 <button onclick="processClick()" class="clicker">Click Here</button>
 
-<p id="total-coins">Total Coins: 0</p>
+<p id="total-coins" class="coin-counter">Total Coins: 0</p>
 
-<button onclick="buyUpgrade('minion')">Buy Minion</button>
-<button onclick="buyUpgrade('billy')">Buy Billy</button>
-<button onclick="buyUpgrade('robot')">Buy Robot</button>
+<button onclick="buyUpgrade('minion')" class="upgrade-button">Buy Minion</button>
+<button onclick="buyUpgrade('billy')" class="upgrade-button">Buy Billy</button>
+<button onclick="buyUpgrade('robot')" class="upgrade-button">Buy Robot</button>
 
 <table>
     <tr>
