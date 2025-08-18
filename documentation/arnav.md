@@ -6,6 +6,7 @@ hide: true
 
 ## Arnav's Documentation
 
+### Sprint 1 Objectives
 <table>
     <tr>
         <th>Skill</th>
@@ -86,6 +87,118 @@ hide: true
     </tr>
     <tr>
         <td>Learning Through Mistakes</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+### Evaluation Matrix
+<table>
+    <tr>
+        <th>Skill</th>
+        <th>Mastered (Y/N)</th>
+        <th>Self Rank (1-5)</th>
+        <th>Peer Rank (1-5)</th>
+        <th>Teacher Rank (1-5)</th>
+        <th>Average</th>
+        <th>Notes/Evidence</th>       
+    </tr>
+    <tr>
+        <td>Attendance</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Work Habits</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Behavior</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Timeliness</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Tech/Cyber Sense</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Tech/Cyber Talk</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Tech Growth</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Advocacy</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Communication & Collab</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Integrity</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Organization</td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
