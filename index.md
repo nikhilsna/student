@@ -83,3 +83,10 @@ hide: true
 </a>
 
 <br>
+
+## AP Exam Prep and Career Resources
+> Help prepare yourself for the AP CSP Exam, using our study guide, and also check back often for resources to help guide your career path in Computer Science
+
+<a href="https://ahaanv19.github.io/student/apcsp" class="button small" style="background-color: #6b4bd3ff">
+    AP CSP Study Prep
+</a>
