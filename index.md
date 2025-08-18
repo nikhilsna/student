@@ -33,16 +33,16 @@ hide: true
     <tr>
         <td>Scrummer</td>
         <td>Nikhil</td>
-        <td></td>
+        <td><a href="https://github.com/nikhilsna/student" target="_blank">github.com/nikhilsna/student</a></td>
         <td>downstream</td>
-        <td></td>
+        <td>student</td>
     </tr>
     <tr>
         <td>Scrummer</td>
         <td>Spencer</td>
-        <td></td>
+        <td><a href="https://github.com/Frogpants/student_spencer" target="_blank">github.com/Frogpants/student_spencer</a></td>
         <td>downstream</td>
-        <td></td>
+        <td>student_spencer</td>
     </tr>
     <tr>
         <td>Scrummer</td>
