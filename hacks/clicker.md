@@ -8,9 +8,20 @@ permalink: /clicker/
 
 <style>
     button {
-        background-color: grey;
+        background-color: #636363;
         color: black;
         border-radius: 5px;
+        font-family: "Lucida Console";
+    }
+
+    button:hover {
+        background-color: #4a4949ff;
+        transition: 0.5s;
+    }
+
+    button:active {
+        background-color: #3b3b3b;
+        transition: 0.25s;
     }
 
     .clicker {
