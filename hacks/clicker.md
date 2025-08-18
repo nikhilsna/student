@@ -4,7 +4,7 @@ title: Clicker
 permalink: /clicker/
 ---
 
-## Clicker Game
+<h2 style="text-align: center;">Clicker Game</h2>
 
 <style>
     button {
