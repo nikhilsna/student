@@ -107,21 +107,21 @@ hide: true
     </tr>
     <tr>
         <td>Attendance</td>
+        <td>Y</td>
+        <td>5</td>
+        <td>5</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>5</td>
+        <td>Have been in class everyday so far on time this week and last.</td>
     </tr>
     <tr>
         <td>Work Habits</td>
+        <td>Y</td>
+        <td>5</td>
+        <td>5</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>4.5</td>
+        <td>I myself think I could have been a bit more directive with assigning roles,and tasks, however I have been on task always working on our website, and contrubuting ideas.</td>
     </tr>
     <tr>
         <td>Behavior</td>
