@@ -121,7 +121,7 @@ hide: true
         <td>5</td>
         <td></td>
         <td>4.5</td>
-        <td>I myself think I could have been a bit more directive with assigning roles,and tasks, however I have been on task always working on our website, and contrubuting ideas.</td>
+        <td>I myself think I could have been a bit more directive with assigning roles,and tasks, however I have been on task always working on our website, and contributing ideas.</td>
     </tr>
     <tr>
         <td>Behavior</td>
