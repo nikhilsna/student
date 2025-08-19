@@ -5,18 +5,6 @@ hide: true
 ---
 
 <style>
-/* Jekyll-compatible CSS - inline styles to ensure compatibility */
-.home-container {
-    background-color: #1e1e2e;
-    color: #f8f8f2;
-    font-family: 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: radial-gradient(circle at 10% 20%, rgba(56,178,172,0.07) 0%, transparent 50%), 
-                      radial-gradient(circle at 90% 80%, rgba(56,178,172,0.07) 0%, transparent 50%);
-    min-height: 100vh;
-}
-
 .page-header {
     text-align: center;
     margin: 0 0 2rem 0;
@@ -52,106 +40,12 @@ hide: true
     text-shadow: 0 0 15px rgba(56,178,172,0.4);
 }
 
-.home-container h2 {
-    font-size: 2rem;
-    font-weight: 400;
-    color: #38b2ac;
-    margin-top: 2rem;
-    text-align: center;
-}
-
-.home-container h3 {
-    font-size: 1.5rem;
-    color: #38b2ac;
-    margin-top: 1.5rem;
-}
-
 .divider {
     border: none;
     height: 1px;
     background: linear-gradient(90deg, rgba(56,178,172,0) 0%, rgba(56,178,172,1) 50%, rgba(56,178,172,0) 100%);
     margin: 1.5rem auto;
     width: 60%;
-}
-
-.content-section {
-    background-color: #2d2d3a;
-    border-radius: 12px;
-    padding: 2rem;
-    margin: 2rem auto;
-    max-width: 1200px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(56,178,172,0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.content-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(56,178,172,0.7), transparent);
-    transition: width 0.3s ease, left 0.3s ease;
-}
-
-.content-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    border-color: rgba(56,178,172,0.3);
-}
-
-.content-section:hover::after {
-    width: 90%;
-    left: 5%;
-}
-
-.team-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.team-table th {
-    background-color: #285e61;
-    color: #38b2ac;
-    padding: 1rem;
-    text-align: left;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-.team-table td {
-    background-color: #383842;
-    padding: 1rem;
-    border-bottom: 1px solid rgba(56,178,172,0.1);
-    transition: all 0.2s ease;
-}
-
-.team-table tr:hover td {
-    background-color: #404050;
-    transform: translateX(2px);
-}
-
-.team-table a {
-    color: #38b2ac;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    display: inline-block;
-}
-
-.team-table a:hover {
-    color: #319795;
-    background-color: rgba(56,178,172,0.1);
 }
 
 .projects-section {
@@ -285,64 +179,54 @@ blockquote {
 }
 </style>
 
-<div class="home-container">
-    <div class="page-header">
-        <h1>Team Dashboard</h1>
-    </div>
-
-<div class="content-section">
-<h2>Team Overview</h2>
-<hr class="divider">
-
-<table class="team-table">
-    <thead>
-        <tr>
-            <th>Role</th>
-            <th>Name</th>
-            <th>Repo Location</th>
-            <th>Stream</th>
-            <th>Repo Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Scrum Master</td>
-            <td>Ahaan</td>
-            <td><a href="https://github.com/Ahaanv19/student" target="_blank">github.com/Ahaanv19/student</a></td>
-            <td>downstream</td>
-            <td>student</td>
-        </tr>
-        <tr>
-            <td>Scrummer</td>
-            <td>Arnav</td>
-            <td><a href="https://github.com/Arnav210/Arnav_2026" target="_blank">github.com/Arnav210/Arnav_2026</a></td>
-            <td>downstream</td>
-            <td>Arnav_2026</td>
-        </tr>
-        <tr>
-            <td>Assistant Scrum Master</td>
-            <td>Ahaan</td>
-            <td><a href="https://github.com/nikhilsna/student" target="_blank">github.com/nikhilsna/student</a><a href="https://github.com/nikhilsna/student" target="_blank">github.com/Ahaanv19/student</a></td>
-            <td>downstream</td>
-            <td>studentstudent</td>
-        </tr>
-        <tr>
-            <td>Scrummer</td>
-            <td>Spencer</td>
-            <td><a href="https://github.com/Frogpants/student_spencer" target="_blank">github.com/Frogpants/student_spencer</a>-</td>
-            <td>downstream</td>
-            <td>student_spencer-</td>
-        </tr>
-        <tr>
-            <td>Scrummer</td>
-            <td>Xavier</td>
-            <td><a href="https://github.com/XavierTho/student" target="_blank">github.com/XavierTho/student</a></td>
-            <td>downstream</td>
-            <td>student</td>
-        </tr>
-    </tbody>
-</table>
+<div class="page-header">
+    <h1>Team Dashboard</h1>
 </div>
+
+<table>
+    <tr>
+        <th>Role</th>
+        <th>Name</th>
+        <th>Repo Location</th>
+        <th>Stream</th>
+        <th>Repo Name</th>
+    </tr>
+    <tr>
+        <td>Scrum Master</td>
+        <td>Ahaan</td>
+        <td><a href="https://github.com/Ahaanv19/student" target="_blank">github.com/Ahaanv19/student</a></td>
+        <td>downstream</td>
+        <td>student</td>
+    </tr>
+    <tr>
+        <td>Scrummer</td>
+        <td>Arnav</td>
+        <td><a href="https://github.com/Arnav210/Arnav_2026" target="_blank">github.com/Arnav210/Arnav_2026</a></td>
+        <td>downstream</td>
+        <td>Arnav_2026</td>
+    </tr>
+    <tr>
+        <td>Scrummer</td>
+        <td>Nikhil</td>
+        <td><a href="https://github.com/nikhilsna/student" target="_blank">github.com/nikhilsna/student</a></td>
+        <td>downstream</td>
+        <td>student</td>
+    </tr>
+    <tr>
+        <td>Scrummer</td>
+        <td>Spencer</td>
+        <td><a href="https://github.com/Frogpants/student_spencer" target="_blank">github.com/Frogpants/student_spencer</a></td>
+        <td>downstream</td>
+        <td>student_spencer</td>
+    </tr>
+    <tr>
+        <td>Scrummer</td>
+        <td>Xavier</td>
+        <td><a href="https://github.com/XavierTho/student" target="_blank">github.com/XavierTho/student</a></td>
+        <td>downstream</td>
+        <td>student</td>
+    </tr>
+</table>
 
 <div class="projects-section">
 <h2>Links to Current Projects</h2>
@@ -355,9 +239,7 @@ blockquote {
 </h3>
 </div>
 
-<div class="content-section">
 <h2>Links to Learning</h2>
-<hr class="divider">
 
 <h3>Development Environment</h3>
 
@@ -378,6 +260,4 @@ blockquote {
     <a href="https://vscode.dev/" class="custom-button" style="background-color: #d38a4bff">
         VSCODE
     </a>
-</div>
-</div>
 </div>
