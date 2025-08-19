@@ -1,11 +1,7 @@
+import {camera} from './camera.js';
 
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-
-const cam = {
-    x: 0,
-    y: 0
-};
 
 const player = {
     x: 0,
@@ -30,10 +26,8 @@ function update() {
     player.y += player.yv;
 
     ctx.fillStyle = 'blue';
-    ctx.fillRect(((player.x - cam.x) + canvas.width/2) - 5, ((player.y - cam.y) + canvas.height/2) - 5, 10, 10);
+    ctx.fillRect(((player.x - camera.x) + canvas.width/2) - 5, ((player.y - camera.y) + canvas.height/2) - 5, 10, 10);
 
-    cam.x += 0.08 * (player.x - cam.x);
-    cam.y += 0.08 * (player.y - cam.y);
     requestAnimationFrame(update);
 };
 
