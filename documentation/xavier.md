@@ -107,12 +107,12 @@ hide: true
     </tr>
     <tr>
         <td>Attendance</td>
+        <td>Y</td>
+        <td>5</td>
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>I've made it to class every single day.</td>
     </tr>
     <tr>
         <td>Work Habits</td>

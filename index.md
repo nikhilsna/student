@@ -236,6 +236,9 @@ blockquote {
     <a href="{{site.baseurl}}/clicker/" target="_blank" class="project-link">
         Clicker Game
     </a>
+        <a href="{{site.baseurl}}/coin-flip" target="_blank" class="project-link">
+        Coin Flip
+    </a>
 </h3>
 </div>
 
@@ -261,3 +264,21 @@ blockquote {
         VSCODE
     </a>
 </div>
+
+## Using Tools as a Team
+
+<a href="{{site.baseurl}}/teamtools" class="button small" style="background-color: #ddf37dff">
+    Teamwork Tools
+</a>
+
+## How API's Work
+
+<a href="{{site.baseurl}}/apilesson" class="button small" style="background-color: #338622ff">
+    APIs Lesson
+</a>
+
+## AP Exam Prep and Career Planning
+
+<a href="{{site.baseurl}}/apcsp" class="button small" style="background-color: #6b4bd3ff">
+    AP CSP Study Prep
+</a>

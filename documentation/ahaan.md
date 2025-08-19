@@ -24,10 +24,10 @@ hide: true
     </tr>
     <tr>
         <td>VSCode Setup & Usage</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>Y</td>
+        <td>5</td>
+        <td>5</td>
+        <td><img src="{{site.baseurl}}/images/ev.png" height="60" title="Home" alt=""></td>
     </tr>
     <tr>
         <td>VSCode Sharing and Collaboration</td>
@@ -117,29 +117,29 @@ hide: true
     <tr>
         <td>Work Habits</td>
         <td>Y</td>
-        <td>5</td>
+        <td>4.5</td>
         <td>5</td>
         <td></td>
         <td>4.5</td>
-        <td>I myself think I could have been a bit more directive with assigning roles,and tasks, however I have been on task always working on our website, and contrubuting ideas.</td>
+        <td>I myself think I could have been a bit more directive with assigning roles,and tasks, however I have been on task always working on our website, and contributing ideas.</td>
     </tr>
     <tr>
         <td>Behavior</td>
+        <td>Y</td>
+        <td>5</td>
+        <td>5</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>5</td>
+        <td>I have been on task all week, and have not caused an issues in class, as well as been dilgently working on elements of our project, like the AP CSP prep guide, and currently working on an AP CSA prep guide.</td>
     </tr>
     <tr>
         <td>Timeliness</td>
+        <td>Y</td>
+        <td>5</td>
+        <td>5</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>5</td>
+        <td>Our group has everything working on time, ready for today's checkpoints, games done, improved on styling.</td>
     </tr>
     <tr>
         <td>Tech/Cyber Sense</td>
@@ -152,12 +152,12 @@ hide: true
     </tr>
     <tr>
         <td>Tech/Cyber Talk</td>
+        <td>Y</td>
+        <td>4.5</td>
+        <td>4.5</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>4.5 </td>
+        <td>In class, always been tech talk on elements for our project, how to grow our project, however there are times where we did get a bit off task, but we rebounded well. </td>
     </tr>
     <tr>
         <td>Tech Growth</td>
@@ -179,12 +179,12 @@ hide: true
     </tr>
     <tr>
         <td>Communication & Collab</td>
+        <td>Y</td>
+        <td>5</td>
+        <td>5</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>5</td>
+        <td>Great Communication and Collab, everyone doing their part to make this project better, use slack to communicate, no one individual is taking over all the thinking.</td>
     </tr>
     <tr>
         <td>Integrity</td>
