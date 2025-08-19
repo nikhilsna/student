@@ -6,6 +6,8 @@ hide: true
 
 ## Xavier's Documentation
 
+<a href="{{site.baseurl}}/coin-flip-documentation/" target="_blank">Coin Flip Documentation</a>
+
 ### Sprint 1 Objectives
 <table>
     <tr>
