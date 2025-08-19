@@ -277,7 +277,7 @@ blockquote {
     APIs Lesson
 </a>
 
-## AP Exams
+## AP Exam Prep and Career Planning
 
 <a href="{{site.baseurl}}/apcsp" class="button small" style="background-color: #6b4bd3ff">
     AP CSP Study Prep

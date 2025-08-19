@@ -24,10 +24,10 @@ hide: true
     </tr>
     <tr>
         <td>VSCode Setup & Usage</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>Y</td>
+        <td>5</td>
+        <td>5</td>
+        <td><img src="{{site.baseurl}}/images/ev.png" height="60" title="Home" alt=""></td>
     </tr>
     <tr>
         <td>VSCode Sharing and Collaboration</td>
