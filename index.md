@@ -261,3 +261,7 @@ blockquote {
         VSCODE
     </a>
 </div>
+
+<a href="{{site.baseurl}}/apcsp" class="button small" style="background-color: #6b4bd3ff">
+    AP CSP Study Prep
+</a>
