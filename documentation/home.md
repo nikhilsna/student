@@ -15,22 +15,22 @@ Each member has their own individual documentation section where they outline wh
     </tr>
     <tr>
         <td>Ahaan</td>
-        <td><a href="{{site.baseurl}}/documentation/ahaan.html">Click Here</a></td>
+        <td><a href="{{site.baseurl}}/documentation/ahaan/ahaan.html">Click Here</a></td>
     </tr>
     <tr>
         <td>Arnav</td>
-        <td><a href="{{site.baseurl}}/documentation/arnav.html">Click Here</a></td>
+        <td><a href="{{site.baseurl}}/documentation/arnav/arnav.html">Click Here</a></td>
     </tr>
     <tr>
         <td>Nikhil</td>
-        <td><a href="{{site.baseurl}}/documentation/nikhil.html">Click Here</a></td>
+        <td><a href="{{site.baseurl}}/documentation/nikhil/nikhil.html">Click Here</a></td>
     </tr>
     <tr>
         <td>Spencer</td>
-        <td><a href="{{site.baseurl}}/documentation/spencer.html">Click Here</a></td>
+        <td><a href="{{site.baseurl}}/documentation/spencer/spencer.html">Click Here</a></td>
     </tr>
     <tr>
         <td>Xavier</td>
-        <td><a href="{{site.baseurl}}/documentation/xavier.html">Click Here</a></td>
+        <td><a href="{{site.baseurl}}/documentation/xavier/xavier.html">Click Here</a></td>
     </tr>
 </table>

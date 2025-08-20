@@ -4,8 +4,19 @@ title: Coin Flip
 permalink: /coin-flip/
 ---
 
+<style>
+    button {
+        background-color: rgba(56, 87, 89, 1);
+        color: white;
+        font-size: 20px;
+        font-weight: 700;
+        width: 100%;
+        height: 150px;
+    }
+</style>
+
 <button onclick="flipCoin()">Flip a Coin</button>
-<p id="flip-results"></p>
+<p id="flip-results" style="text-align: center;">Heads: 0; Tails: 0</p>
 
 <script>
     let heads = 0;
@@ -20,6 +31,4 @@ permalink: /coin-flip/
 
         document.getElementById("flip-results").innerHTML = `Heads: ${heads}; Tails: ${tails}`
     };
-
-  
 </script>
