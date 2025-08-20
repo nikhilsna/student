@@ -193,35 +193,35 @@ blockquote {
     </tr>
     <tr>
         <td>Scrum Master</td>
-        <td>Ahaan</td>
+        <td><a href="{{site.baseurl}}/documentation/ahaan/ahaan.html">Ahaan</a></td>
         <td><a href="https://github.com/Ahaanv19/student" target="_blank">github.com/Ahaanv19/student</a></td>
         <td>downstream</td>
         <td>student</td>
     </tr>
     <tr>
         <td>Scrummer</td>
-        <td>Arnav</td>
+        <td><a href="{{site.baseurl}}/documentation/arnav/arnav.html">Arnav</a></td>
         <td><a href="https://github.com/Arnav210/Arnav_2026" target="_blank">github.com/Arnav210/Arnav_2026</a></td>
         <td>downstream</td>
         <td>Arnav_2026</td>
     </tr>
     <tr>
         <td>Scrummer</td>
-        <td>Nikhil</td>
+        <td><a href="{{site.baseurl}}/documentation/nikhil/nikhil.html">Nikhil</a></td>
         <td><a href="https://github.com/nikhilsna/student" target="_blank">github.com/nikhilsna/student</a></td>
         <td>downstream</td>
         <td>student</td>
     </tr>
     <tr>
         <td>Scrummer</td>
-        <td>Spencer</td>
+        <td><a href="{{site.baseurl}}/documentation/spencer/spencer.html">Spencer</a></td>
         <td><a href="https://github.com/Frogpants/student_spencer" target="_blank">github.com/Frogpants/student_spencer</a></td>
         <td>downstream</td>
         <td>student_spencer</td>
     </tr>
     <tr>
         <td>Scrummer</td>
-        <td>Xavier</td>
+        <td><a href="{{site.baseurl}}/documentation/xavier/xavier.html">Xavier</a></td>
         <td><a href="https://github.com/XavierTho/student" target="_blank">github.com/XavierTho/student</a></td>
         <td>downstream</td>
         <td>student</td>
