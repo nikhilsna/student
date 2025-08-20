@@ -18,8 +18,8 @@ export var tiles = [];
 export function addTile(x, y, type) {
     const temp = {x: x - camera.x, y: y - camera.y};
     const newTile = {
-        x: Math.floor(temp.x/10)*10 - camera.x,
-        y: Math.floor(temp.y/10)*10 - camera.y,
+        x: Math.floor(temp.x/20)*20 - camera.x,
+        y: Math.floor(temp.y/20)*20 - camera.y,
         type: type,
         col: 0,
         life: 0
