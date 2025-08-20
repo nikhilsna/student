@@ -7,6 +7,7 @@ export const tile = {
     x: 0,
     y: 0,
     col: 0,
+    life: 0,
 };
 
 var editorType = 1;
@@ -15,42 +16,31 @@ var actionEnabled = false;
 export var tiles = [];
 
 export function addTile(x, y, type) {
-    const temp = {x: x + camera.x, y: y + camera.y};
-    tile.x = Math.floor(temp.x/10)*10 - camera.x;
-    tile.y = Math.floor(temp.y/10)*10 - camera.y;
-    tile.type = type;
-    tiles.push(tile);
+    const temp = {x: x - camera.x, y: y - camera.y};
+    const newTile = {
+        x: Math.floor(temp.x/10)*10 - camera.x,
+        y: Math.floor(temp.y/10)*10 - camera.y,
+        type: type,
+        col: 0,
+        life: 0
+    };
+    tiles.push(newTile);
 };
 
-export function drawTiles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < tiles.length; i++) {
-        const t = tiles[i];
-        if (!checkOnscreen(t.x, t.y)) return;
-        ctx.fillStyle = t.type === 1 ? 'blue' : 'red';
-        ctx.fillRect(t.x, t.y, 10, 10);
-    }
-};
+// canvas.addEventListener("mousemove", (e) => {
+//     const rect = canvas.getBoundingClientRect();
+//     mouse = {x: e.clientX, y: e.clientY};
+// });
 
-function update() {
-    drawTiles();
-    requestAnimationFrame(update);
-};
+// document.addEventListener("keydown", (e) => {
+//     if (e.altKey && e.key === "0") {
+//     actionEnabled = !actionEnabled;
+//     console.log("Developer Mode:", actionEnabled);
+//     }
+// });
 
-canvas.addEventListener("mousemove", (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouse = {x: e.clientX, y: e.clientY};
-});
-
-document.addEventListener("keydown", (e) => {
-    if (e.altKey && e.key === "0") {
-    actionEnabled = !actionEnabled;
-    console.log("Developer Mode:", actionEnabled);
-    }
-});
-
-canvas.addEventListener("click", (e) => {
-        const rect = canvas.getBoundingClientRect();
-        if (!actionEnabled) return;
-        addTile(mouse.x, mouse.y, editorType);
-});
+// canvas.addEventListener("click", (e) => {
+//         const rect = canvas.getBoundingClientRect();
+//         if (!actionEnabled) return;
+//         addTile(mouse.x, mouse.y, editorType);
+// });
