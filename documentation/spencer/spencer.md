@@ -109,7 +109,7 @@ hide: true
         <td>Attendance</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>5</td>
         <td></td>
         <td></td>
         <td></td>
@@ -118,7 +118,7 @@ hide: true
         <td>Work Habits</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>5</td>
         <td></td>
         <td></td>
         <td></td>
@@ -127,7 +127,7 @@ hide: true
         <td>Behavior</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>5</td>
         <td></td>
         <td></td>
         <td></td>
@@ -136,7 +136,7 @@ hide: true
         <td>Timeliness</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td></td>
         <td></td>
         <td></td>
@@ -145,7 +145,7 @@ hide: true
         <td>Tech/Cyber Sense</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>5</td>
         <td></td>
         <td></td>
         <td></td>
@@ -154,7 +154,7 @@ hide: true
         <td>Tech/Cyber Talk</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td></td>
         <td></td>
         <td></td>
@@ -172,7 +172,7 @@ hide: true
         <td>Advocacy</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>5</td>
         <td></td>
         <td></td>
         <td></td>
@@ -181,7 +181,7 @@ hide: true
         <td>Communication & Collab</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td></td>
         <td></td>
         <td></td>
@@ -190,7 +190,7 @@ hide: true
         <td>Integrity</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td></td>
         <td></td>
         <td></td>
@@ -199,7 +199,7 @@ hide: true
         <td>Organization</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td></td>
         <td></td>
         <td></td>
