@@ -214,6 +214,13 @@ hide: true
     </tr>
     <tr>
         <td>Scrummer</td>
+        <td><a href="{{site.baseurl}}/documentation/shaurya/shaurya.html">Shaurya</a></td>
+        <td></td>
+        <td>downstream</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Scrummer</td>
         <td><a href="{{site.baseurl}}/documentation/spencer/spencer.html">Spencer</a></td>
         <td><a href="https://github.com/Frogpants/student_spencer" target="_blank">github.com/Frogpants/student_spencer</a></td>
         <td>downstream</td>

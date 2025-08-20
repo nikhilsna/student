@@ -26,6 +26,10 @@ Each member has their own individual documentation section where they outline wh
         <td><a href="{{site.baseurl}}/documentation/nikhil/nikhil.html">Click Here</a></td>
     </tr>
     <tr>
+        <td>Shaurya</td>
+        <td><a href="{{site.baseurl}}/documentation/shaurya/shaurya.html">Click Here</a></td>
+    </tr>
+    <tr>
         <td>Spencer</td>
         <td><a href="{{site.baseurl}}/documentation/spencer/spencer.html">Click Here</a></td>
     </tr>
