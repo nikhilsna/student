@@ -239,6 +239,9 @@ blockquote {
         <a href="{{site.baseurl}}/coin-flip" target="_blank" class="project-link">
         Coin Flip
     </a>
+    <a href="{{site.baseurl}}/navigation/game/game.html" target="_blank" class="project-link"> 
+        Bumper Cars
+    </a>
 </h3>
 </div>
 
