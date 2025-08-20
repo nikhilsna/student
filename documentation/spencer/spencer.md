@@ -6,6 +6,8 @@ hide: true
 
 ## Spencer's Documentation
 
+[Bumper Car Game](./movementBlog.md)
+
 ### Sprint 1 Objectives
 <table>
     <tr>
