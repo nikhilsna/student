@@ -64,10 +64,12 @@ function flipCoin() {
 ### What You Can Add
 While the foundational code has been set up for you, there is a lot more you can add, and the list below is a handful of examples:
 1. Save the results so the user can access them if they come back to the site later (hint: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">local storage</a>)
-2. Save milestones (what side got to 10, 100, 1000 first)
+2. Save milestones (what side got to 10, 100, 1000 first) and format that into a table
 3. Add a button to reset progress (particularly helpful if you do the first example)
 4. Add the ability to guess what the coin will be before flipping
 5. Add a streak counter of correct guesses if example 4 is implemented
 
 You can use these or other examples you think of to expand upon the code. 
 
+Here's what the second example would like:
+<img src="{{site.baseurl}}/images/coin-flip/coin-flip-milestone-table.png">
