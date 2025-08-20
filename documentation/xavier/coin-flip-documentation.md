@@ -29,7 +29,7 @@ function flipCoin() {
     }
 }
 ```
-The key thing to point out is the use of the Math.random() function which is a built-in function provided by the creators of JavaScript which allows us coders to utilize randomness (such as with a coin flip).
+The key thing to point out is the use of the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random" target="_blank">Math.random()</a> function which is a built-in function provided by the creators of JavaScript which allows us coders to utilize randomness (such as with a coin flip).
 
 
 #### Step 3: Make a button so the user can interact with the function
@@ -44,7 +44,7 @@ With buttons, you can make them run a function by adding onclick="functionHere()
 <p id="flip-results" style="text-align: center;">Heads: 0; Tails: 0</p>
 ```
 
-The first step is making something in HTML, such as a paragraph where the results will be displayed. You can connect it later to JavaScript by giving it an ID.
+The first step is making something in HTML, such as a paragraph where the results will be displayed. You can connect it later to JavaScript by giving it an <a href="https://www.w3schools.com/html/html_id.asp" target="_blank">ID</a>.
 
 Once you do this, we then add back to our flipCoin() function to update the HTML with the new results each time.
 
@@ -63,7 +63,7 @@ function flipCoin() {
 
 ### What You Can Add
 While the foundational code has been set up for you, there is a lot more you can add, and the list below is a handful of examples:
-1. Save the results so the user can access them if they come back to the site later (hint: local storage)
+1. Save the results so the user can access them if they come back to the site later (hint: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank">local storage</a>)
 2. Save milestones (what side got to 10, 100, 1000 first)
 3. Add a button to reset progress (particularly helpful if you do the first example)
 4. Add the ability to guess what the coin will be before flipping
