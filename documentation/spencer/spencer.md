@@ -109,7 +109,7 @@ hide: true
     </tr>
     <tr>
         <td>Attendance</td>
-        <td></td>
+        <td>N</td>
         <td>5</td>
         <td>5</td>
         <td></td>
@@ -118,7 +118,7 @@ hide: true
     </tr>
     <tr>
         <td>Work Habits</td>
-        <td></td>
+        <td>N</td>
         <td>4</td>
         <td>5</td>
         <td></td>
@@ -127,7 +127,7 @@ hide: true
     </tr>
     <tr>
         <td>Behavior</td>
-        <td></td>
+        <td>Y</td>
         <td>5</td>
         <td>5</td>
         <td></td>
@@ -136,7 +136,7 @@ hide: true
     </tr>
     <tr>
         <td>Timeliness</td>
-        <td></td>
+        <td>Y</td>
         <td>3</td>
         <td>4</td>
         <td></td>
@@ -145,7 +145,7 @@ hide: true
     </tr>
     <tr>
         <td>Tech/Cyber Sense</td>
-        <td></td>
+        <td>N</td>
         <td>4</td>
         <td>5</td>
         <td></td>
@@ -154,7 +154,7 @@ hide: true
     </tr>
     <tr>
         <td>Tech/Cyber Talk</td>
-        <td></td>
+        <td>N</td>
         <td>3</td>
         <td>4</td>
         <td></td>
@@ -163,7 +163,7 @@ hide: true
     </tr>
     <tr>
         <td>Tech Growth</td>
-        <td></td>
+        <td>N</td>
         <td>5</td>
         <td></td>
         <td></td>
@@ -172,7 +172,7 @@ hide: true
     </tr>
     <tr>
         <td>Advocacy</td>
-        <td></td>
+        <td>N</td>
         <td>4</td>
         <td>5</td>
         <td></td>
@@ -181,7 +181,7 @@ hide: true
     </tr>
     <tr>
         <td>Communication & Collab</td>
-        <td></td>
+        <td>Y</td>
         <td>4</td>
         <td>4</td>
         <td></td>
@@ -190,8 +190,8 @@ hide: true
     </tr>
     <tr>
         <td>Integrity</td>
-        <td></td>
-        <td>3</td>
+        <td>Y</td>
+        <td>4</td>
         <td>4</td>
         <td></td>
         <td></td>
@@ -199,7 +199,7 @@ hide: true
     </tr>
     <tr>
         <td>Organization</td>
-        <td></td>
+        <td>Y</td>
         <td>4</td>
         <td>4</td>
         <td></td>
