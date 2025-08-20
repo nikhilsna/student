@@ -19,7 +19,7 @@ title: Bumper Cars
 <body>
   <canvas id="gameCanvas" width="800" height="600"></canvas>
   <script type="module">
-    import {player} from './move.js';
+    import {player, pointAt, move} from './move.js';
     import {camera} from './camera.js';
     import {tiles, addTile} from './tile.js';
     import {checkOnscreen} from './screen.js';
@@ -33,6 +33,13 @@ title: Bumper Cars
         if (keys['s']) player.yv += player.speed;
         if (keys['a']) player.xv -= player.speed;
         if (keys['d']) player.xv += player.speed;
+    };
+    //
+    function drawText() {
+        ctx.font = '24px Arial';
+        ctx.fillStyle = 'black';
+        ctx.fillText('Health: ' + player.health, 20, 40);
+        ctx.fillText('Coins: ' + player.coins, 20, 68);
     };
     //
     function drawTiles(width,height) {
@@ -70,7 +77,7 @@ title: Bumper Cars
                 ctx.fillRect((t.x-camera.x) + canvas.width/4-10, (t.y-camera.y) + canvas.height/4-10, 20, 20);
             } else if (t.type === 3) {
                 if (updCollide(player,t,20)) {
-                    player.health += 15;
+                    player.coins += 1;
                     tiles.splice(i,1);
                     i--;
                 }
@@ -113,6 +120,9 @@ title: Bumper Cars
         //
         ctx.fillStyle = 'blue';
         ctx.fillRect(player.x+(canvas.width/2)-12.5,player.y+(canvas.height/2)-12.5,25,25);
+        //
+        drawText();
+        //
         requestAnimationFrame(update);
     };
     //

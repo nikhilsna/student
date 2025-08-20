@@ -8,6 +8,7 @@ export const player = {
     speed: 0.4,
     dir: 0,
     health: 100,
+    coins: 0,
 };
 
 export function pointAt(x,y) {
