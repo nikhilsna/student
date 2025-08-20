@@ -215,9 +215,9 @@ hide: true
     <tr>
         <td>Scrummer</td>
         <td><a href="{{site.baseurl}}/documentation/shaurya/shaurya.html">Shaurya</a></td>
-        <td></td>
+        <td><a href="https://github.com/anonymous-dyce/student" target="_blank">github.com/anonymous-dyce/student</a></td>
         <td>downstream</td>
-        <td></td>
+        <td>student</td>
     </tr>
     <tr>
         <td>Scrummer</td>
