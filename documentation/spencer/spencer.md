@@ -110,7 +110,7 @@ hide: true
     <tr>
         <td>Attendance</td>
         <td></td>
-        <td></td>
+        <td>5</td>
         <td>5</td>
         <td></td>
         <td></td>
@@ -119,7 +119,7 @@ hide: true
     <tr>
         <td>Work Habits</td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td>5</td>
         <td></td>
         <td></td>
@@ -128,7 +128,7 @@ hide: true
     <tr>
         <td>Behavior</td>
         <td></td>
-        <td></td>
+        <td>5</td>
         <td>5</td>
         <td></td>
         <td></td>
@@ -137,7 +137,7 @@ hide: true
     <tr>
         <td>Timeliness</td>
         <td></td>
-        <td></td>
+        <td>3</td>
         <td>4</td>
         <td></td>
         <td></td>
@@ -146,7 +146,7 @@ hide: true
     <tr>
         <td>Tech/Cyber Sense</td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td>5</td>
         <td></td>
         <td></td>
@@ -155,7 +155,7 @@ hide: true
     <tr>
         <td>Tech/Cyber Talk</td>
         <td></td>
-        <td></td>
+        <td>3</td>
         <td>4</td>
         <td></td>
         <td></td>
@@ -164,7 +164,7 @@ hide: true
     <tr>
         <td>Tech Growth</td>
         <td></td>
-        <td></td>
+        <td>5</td>
         <td></td>
         <td></td>
         <td></td>
@@ -173,7 +173,7 @@ hide: true
     <tr>
         <td>Advocacy</td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td>5</td>
         <td></td>
         <td></td>
@@ -182,7 +182,7 @@ hide: true
     <tr>
         <td>Communication & Collab</td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td>4</td>
         <td></td>
         <td></td>
@@ -191,7 +191,7 @@ hide: true
     <tr>
         <td>Integrity</td>
         <td></td>
-        <td></td>
+        <td>3</td>
         <td>4</td>
         <td></td>
         <td></td>
@@ -200,7 +200,7 @@ hide: true
     <tr>
         <td>Organization</td>
         <td></td>
-        <td></td>
+        <td>4</td>
         <td>4</td>
         <td></td>
         <td></td>
