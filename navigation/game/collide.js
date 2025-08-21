@@ -15,10 +15,11 @@ function moveObj(obj, speed, angle) {
     obj.y += Math.sin(angle) * speed;
 };
 
-export function updCollide(obj1,obj2,radius) {
-    const dist = distance(obj1.x, obj1.y, obj2.x, obj2.y);
-    if (dist < radius) {
-        return true;
-    }
-    return false;
-};
+export function updCollide(obj1, obj2, size) {
+    return (
+        obj1.x < obj2.x + size &&
+        obj1.x + size > obj2.x &&
+        obj1.y < obj2.y + size &&
+        obj1.y + size > obj2.y
+    );
+}

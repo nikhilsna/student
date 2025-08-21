@@ -17,7 +17,13 @@ title: Bumper Cars
   </style>
 </head>
 <body>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div style="position:relative; width:800px; height:600px; margin:0 auto;">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <div id="mainMenu" style="position:absolute;top:0;left:0;width:800px;height:600px;background:#eee;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;">
+            <h1 style="font-size:3em;margin-bottom:1em;">Bumper Cars</h1>
+            <button id="startBtn" style="font-size:2em;padding:0.5em 2em;">Start Game</button>
+        </div>
+    </div>
   <script type="module">
     import {player, pointAt, move} from './move.js';
     import {camera} from './camera.js';
@@ -26,7 +32,16 @@ title: Bumper Cars
     import {distance, updCollide} from './collide.js';
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
-    //
+    const mainMenu = document.getElementById('mainMenu');
+    const startBtn = document.getElementById('startBtn');
+    let gameStarted = false;
+    startBtn.addEventListener('click', () => {
+      mainMenu.style.display = 'none';
+      gameStarted = true;
+      update();
+      spawnTiles(3);
+    });
+    // ...existing code...
     const keys = {};
     function keysDetection() {
         if (keys['w']) player.yv -= player.speed;
@@ -34,14 +49,12 @@ title: Bumper Cars
         if (keys['a']) player.xv -= player.speed;
         if (keys['d']) player.xv += player.speed;
     };
-    //
     function drawText() {
         ctx.font = '24px Arial';
         ctx.fillStyle = 'black';
         ctx.fillText('Health: ' + player.health, 20, 40);
         ctx.fillText('Coins: ' + player.coins, 20, 68);
     };
-    //
     function drawTiles(width,height) {
         for (let i = 0; i < tiles.length; i++) {
             const t = tiles[i];
@@ -65,7 +78,7 @@ title: Bumper Cars
                     move(-1);
                 }
                 ctx.fillStyle = 'grey';
-                ctx.fillRect((t.x-camera.x) + canvas.width/4-10, (t.y-camera.y) + canvas.height/4-10, 20, 20);
+                ctx.fillRect((t.x-camera.x) + (canvas.width-10), (t.y-camera.y) + (canvas.height-10), 20, 20);
             } else if (t.type === 2) {
                 if (updCollide(player,t,20)) {
                     console.log("collide")
@@ -86,11 +99,9 @@ title: Bumper Cars
             }
         }
     };
-    //
     function wait(seconds) {
         return new Promise(resolve => setTimeout(resolve, seconds * 1000));
     };
-    //
     async function spawnTiles(waitTime) {
         while(true) {
             await wait(waitTime-(playTime/1000));
@@ -103,38 +114,28 @@ title: Bumper Cars
             addTile(temp.x,temp.y,Math.floor((Math.random()+1)*2));
         }
     };
-    //
     var playTime = 0;
     function update() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
-        //
         playTime += 0.1;
         drawTiles(canvas.width, canvas.height);
-        //
         keysDetection();
         player.xv *= 0.95;
         player.yv *= 0.95;
-        //
         player.x += player.xv;
         player.y += player.yv;
-        //
         ctx.fillStyle = 'blue';
         ctx.fillRect(player.x+(canvas.width/2)-12.5,player.y+(canvas.height/2)-12.5,25,25);
-        //
         drawText();
-        //
         requestAnimationFrame(update);
     };
-    //
-    update();
-    spawnTiles(3);
-    //
     document.addEventListener('keydown', (e) => {
         keys[e.key.toLowerCase()] = true;
     });
     document.addEventListener('keyup', (e) => {
         keys[e.key.toLowerCase()] = false;
     });
+    // Game does not start until Start Game is clicked
   </script>
 </body>
 </html>
