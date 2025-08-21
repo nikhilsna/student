@@ -22,4 +22,4 @@ export function updCollide(obj1, obj2, size) {
         obj1.y < obj2.y + size &&
         obj1.y + size > obj2.y
     );
-}
+};

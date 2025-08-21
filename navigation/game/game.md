@@ -87,7 +87,7 @@ title: Bumper Cars
                     move(-1);
                 }
                 ctx.fillStyle = 'red';
-                ctx.fillRect((t.x-camera.x) + canvas.width/4-10, (t.y-camera.y) + canvas.height/4-10, 20, 20);
+                ctx.fillRect((t.x-camera.x) + (canvas.width/2)-10, (t.y-camera.y) + (canvas.height/2)-10, 20, 20);
             } else if (t.type === 3) {
                 if (updCollide(player,t,20)) {
                     player.coins += 1;
@@ -95,7 +95,7 @@ title: Bumper Cars
                     i--;
                 }
                 ctx.fillStyle = 'yellow';
-                ctx.fillRect((t.x-camera.x) + (canvas.width/4)-5, (t.y-camera.y) + (canvas.height/4)-5, 10, 10);
+                ctx.fillRect((t.x-camera.x) + (canvas.width/2)-5, (t.y-camera.y) + (canvas.height/2)-5, 10, 10);
             }
         }
     };
@@ -107,9 +107,10 @@ title: Bumper Cars
             await wait(waitTime-(playTime/1000));
             console.log(Math.floor(playTime/1000))
             console.log(tiles)
+            let rand = Math.random();
             const temp = {
-                x: Math.floor(Math.random()*(canvas.width-10))+camera.x,
-                y: Math.floor(Math.random()*(canvas.height-10))+camera.y
+                x: Math.floor(rand*(canvas.width-10))+player.x,
+                y: Math.floor(rand*(canvas.height-10))+player.y
             };
             addTile(temp.x,temp.y,Math.floor((Math.random()+1)*2));
         }
@@ -120,8 +121,8 @@ title: Bumper Cars
         playTime += 0.1;
         drawTiles(canvas.width, canvas.height);
         keysDetection();
-        player.xv *= 0.95;
-        player.yv *= 0.95;
+        player.xv *= 0.9;
+        player.yv *= 0.9;
         player.x += player.xv;
         player.y += player.yv;
         ctx.fillStyle = 'blue';
