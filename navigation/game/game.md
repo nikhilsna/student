@@ -1,7 +1,4 @@
----
-layout: post
-title: Bumper Cars
----
+
 
 <html lang="en">
 <head>
