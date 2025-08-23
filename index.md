@@ -258,6 +258,15 @@ hide: true
     <a href="{{site.baseurl}}/apcsp" class="project-link">
         CSP Study Prep
     </a>
+    <a href="{{site.baseurl}}/jp" class="project-link">
+        Jupyter Notebooks and JS
+    </a>
+    <a href="{{site.baseurl}}/gp" class="project-link">
+        Github Pages Anatomy
+    </a>
+    <a href="{{site.baseurl}}/jkyl" class="project-link">
+        Jekyll Themes
+    </a>
 </h3>
 </div>
 

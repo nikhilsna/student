@@ -1,9 +1,9 @@
 ---
-layout: base
-title: Jupyter Notebooks & JavaScript
-hide: true
+layout: post
+permalink: /jp
+title: Jupyter Notebooks and JS
+categories: ['Lesson']
 ---
-# AP Computer Science Advanced: GitHub Pages LxD Series Lessons
 
 ## Lesson 1: Jupyter Notebooks & JavaScript
 
