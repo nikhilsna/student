@@ -205,3 +205,4 @@ hide: true
         <td>I try to stay organized with my work and planning, but I occasionally let things slip or have to backtrack to keep track of everything. It’s an area I want to sharpen.</td>
     </tr>
 </table>
+
