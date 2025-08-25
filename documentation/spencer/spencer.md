@@ -109,101 +109,101 @@ hide: true
     </tr>
     <tr>
         <td>Attendance</td>
-        <td></td>
-        <td></td>
+        <td>N</td>
+        <td>5</td>
         <td>5</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>Regularly attending coding sessions or team meetings helps ensure consistent progress on JavaScript projects and enables timely collaboration on shared code.</td>
     </tr>
     <tr>
         <td>Work Habits</td>
-        <td></td>
-        <td></td>
+        <td>N</td>
+        <td>4</td>
         <td>5</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>Consistently writing and refactoring JavaScript code, using version control (like Git), and following coding standards demonstrates strong work habits and leads to higher quality software.</td>
     </tr>
     <tr>
         <td>Behavior</td>
-        <td></td>
-        <td></td>
+        <td>Y</td>
+        <td>5</td>
         <td>5</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>Demonstrating respectful communication and positive collaboration when reviewing JavaScript code or working in pair programming sessions helps maintain a productive team environment.</td>
     </tr>
     <tr>
         <td>Timeliness</td>
-        <td></td>
-        <td></td>
+        <td>Y</td>
+        <td>3</td>
         <td>4</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>Submitting JavaScript assignments or project updates on time ensures that development milestones are met and allows for prompt feedback and iteration.</td>
     </tr>
     <tr>
         <td>Tech/Cyber Sense</td>
-        <td></td>
-        <td></td>
+        <td>N</td>
+        <td>4</td>
         <td>5</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>Practicing safe coding habits in JavaScript, such as validating user input and avoiding the use of eval(), helps prevent security vulnerabilities like XSS attacks.</td>
     </tr>
     <tr>
         <td>Tech/Cyber Talk</td>
-        <td></td>
-        <td></td>
+        <td>N</td>
+        <td>3</td>
         <td>4</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>Explaining JavaScript security concepts, such as the importance of using HTTPS and Content Security Policy (CSP), demonstrates effective communication of cyber safety practices to peers.</td>
     </tr>
     <tr>
         <td>Tech Growth</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Advocacy</td>
-        <td></td>
-        <td></td>
+        <td>N</td>
+        <td>4</td>
         <td>5</td>
         <td></td>
         <td></td>
+        <td>Learning new JavaScript frameworks (like React or Vue) and applying modern ES6+ features shows ongoing growth and adaptation to current technology trends.</td>
+    </tr>
+    <tr>
+        <td>Advocacy</td>
+        <td>N</td>
+        <td>4</td>
+        <td>5</td>
         <td></td>
+        <td></td>
+        <td>Encouraging classmates to use best practices in JavaScript, such as code reviews and linting tools, helps promote quality and maintainable code within the team.</td>
     </tr>
     <tr>
         <td>Communication & Collab</td>
-        <td></td>
-        <td></td>
+        <td>Y</td>
+        <td>4</td>
         <td>4</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>Using GitHub to share JavaScript code and collaborating through pull requests and code reviews enables effective teamwork and clear communication among developers.</td>
     </tr>
     <tr>
         <td>Integrity</td>
-        <td></td>
-        <td></td>
+        <td>Y</td>
+        <td>4</td>
         <td>4</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>Citing sources when using third-party JavaScript libraries and avoiding plagiarism by writing original code demonstrates honesty and ethical behavior in programming.</td>
     </tr>
     <tr>
         <td>Organization</td>
-        <td></td>
-        <td></td>
+        <td>Y</td>
+        <td>4</td>
         <td>4</td>
         <td></td>
         <td></td>
-        <td></td>
+        <td>Structuring JavaScript projects with clear folder hierarchies, separating code into modules, and maintaining a tidy codebase makes development and maintenance easier for everyone.</td>
     </tr>
 </table>

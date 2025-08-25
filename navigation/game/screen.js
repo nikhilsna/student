@@ -6,4 +6,5 @@ export function checkOnscreen(x, y, width, height) {
     if (Math.abs(temp.x) <= width / 2 && Math.abs(temp.y) <= height / 2) {
         return true;
     }
+    return false;
 };
