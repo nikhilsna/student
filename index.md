@@ -236,7 +236,7 @@ hide: true
 </table>
 
 <div class="projects-section">
-<h2>Links to Current Projects</h2>
+<h2>Links to Current Projects/Lessons</h2>
 <hr class="divider">
 
 <h3>
@@ -256,7 +256,7 @@ hide: true
     APIs Lesson
     </a>
     <a href="{{site.baseurl}}/apcsp" class="project-link">
-        CSP Study Prep
+        AP CSP Study Prep
     </a>
     <a href="{{site.baseurl}}/jp" class="project-link">
         Jupyter Notebooks and JS
