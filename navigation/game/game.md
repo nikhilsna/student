@@ -7,7 +7,7 @@
   <style>
     canvas {
       border: 1px solid #333;
-      background: #eee;
+      background: #b7b7b7ff;
       display: block;
       margin: 20px auto;
     }
@@ -70,7 +70,6 @@
             }
             if (t.type === 1) {
                 if (updCollide(player,t,20)) {
-                    player.health -= 15;
                     pointAt(t.x,t.y);
                     move(-1);
                 }
@@ -79,9 +78,9 @@
             } else if (t.type === 2) {
                 if (updCollide(player,t,20)) {
                     console.log("collide")
-                    player.health -= 15;
+                    player.health -= 1;
                     pointAt(t.x,t.y);
-                    move(-1);
+                    move(-5);
                 }
                 ctx.fillStyle = 'red';
                 ctx.fillRect((t.x-camera.x) + (canvas.width/2)-10, (t.y-camera.y) + (canvas.height/2)-10, 20, 20);
@@ -105,11 +104,29 @@
             console.log(Math.floor(playTime/1000))
             let rand = (Math.random()*2)-1;
             const temp = {
-                x: Math.floor(rand*(canvas.width/2-10))+camera.x,
-                y: Math.floor(rand*(canvas.height/2+10))+camera.y,
+                x: Math.floor(rand*(canvas.width/2-20))+camera.x,
+                y: Math.floor(rand*(canvas.height/2-20))+camera.y,
             };
             addTile(temp.x,temp.y,Math.floor((Math.random()+1)*2));
             console.log(tiles)
+        }
+    };
+    function border(width,height) {
+        if (Math.abs(player.x) >= width) {
+            player.xv *= -1;
+            if (player.x > 0) {
+                player.x = width;
+            } else {
+                player.x = -width;
+            }
+        }
+        if (Math.abs(player.y) >= height) {
+            player.yv *= -1;
+            if (player.y > 0) {
+                player.y = height;
+            } else {
+                player.y = -height;
+            }
         }
     };
     var playTime = 0;
@@ -122,6 +139,10 @@
         player.yv *= 0.9;
         player.x += player.xv;
         player.y += player.yv;
+        border(canvas.width/2 - 20, canvas.height/2 - 20);
+        if (player.health < 0) {
+            player.health = 0;
+        }
         ctx.fillStyle = 'blue';
         ctx.fillRect(player.x+(canvas.width/2)-12.5,player.y+(canvas.height/2)-12.5,25,25);
         drawText();
