@@ -236,7 +236,7 @@ hide: true
 </table>
 
 <div class="projects-section">
-<h2>Links to Current Projects/Lessons</h2>
+<h2>Links to Current Projects</h2>
 <hr class="divider">
 
 <h3>
@@ -249,6 +249,15 @@ hide: true
     <a href="{{site.baseurl}}/navigation/game/game.html" target="_blank" class="project-link"> 
         Bumper Cars
     </a>
+</h3>
+</div>
+
+
+<div class="projects-section">
+<h2>Links to Current Lessons</h2>
+<hr class="divider">
+
+<h3>
     <a href="{{site.baseurl}}/teamtools" class="project-link">
         Team Tools
     </a>
