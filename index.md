@@ -240,12 +240,6 @@ hide: true
 <hr class="divider">
 
 <h3>
-    <a href="{{site.baseurl}}/clicker/" target="_blank" class="project-link">
-        Clicker Game
-    </a>
-        <a href="{{site.baseurl}}/coin-flip" target="_blank" class="project-link">
-        Coin Flip
-    </a>
     <a href="{{site.baseurl}}/navigation/game/game.html" target="_blank" class="project-link"> 
         Bumper Cars
     </a>
