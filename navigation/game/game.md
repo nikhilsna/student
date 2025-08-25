@@ -38,7 +38,7 @@
       update();
       spawnTiles(3);
     });
-    // ...existing code...
+    //
     const keys = {};
     function keysDetection() {
         if (keys['w']) player.yv -= player.speed;
@@ -63,7 +63,7 @@
                     continue;
                 }
             }
-            if (checkOnscreen(t.x, t.y, width, height)) {
+            if (!checkOnscreen(t.x, t.y, width, height)) {
                 tiles.splice(i,1);
                 i--;
                 continue;
@@ -103,13 +103,13 @@
         while(true) {
             await wait(waitTime-(playTime/1000));
             console.log(Math.floor(playTime/1000))
-            console.log(tiles)
-            let rand = Math.random();
+            let rand = (Math.random()*2)-1;
             const temp = {
-                x: Math.floor(rand*(canvas.width-10))+player.x,
-                y: Math.floor(rand*(canvas.height-10))+player.y
+                x: Math.floor(rand*(canvas.width/2-10))+camera.x,
+                y: Math.floor(rand*(canvas.height/2+10))+camera.y,
             };
             addTile(temp.x,temp.y,Math.floor((Math.random()+1)*2));
+            console.log(tiles)
         }
     };
     var playTime = 0;
