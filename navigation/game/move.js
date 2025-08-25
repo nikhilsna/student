@@ -5,7 +5,7 @@ export const player = {
     y: 0,
     xv: 0,
     yv: 0,
-    speed: 0.4,
+    speed: 0.6,
     dir: 0,
     health: 100,
     coins: 0,
