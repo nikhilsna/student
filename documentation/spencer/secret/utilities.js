@@ -8,6 +8,6 @@ export function distance2D(x1, y1, x2, y2) {
 };
 
 export const physics = {
-    GRAVITY: 9.81,
+    GRAVITY: 6.676 * 10**-11,
     SPEED_OF_LIGHT: 299792458,
 };

@@ -28,6 +28,7 @@ export function createParticle(x, y, z) {
         dy: 0
     };
     particles.push(newParticle);
+    console.log('new particle');
     return particles.length - 1;
 };
 
@@ -41,9 +42,9 @@ export function setUpParticles(count) {
 };
 
 export function accelerate(p, speed) {
-    particle.xv += speed * Math.sin(particle.dx);
-    particle.yv += speed * Math.sin(particle.dy);
-    particle.zv += speed * Math.cos(particle.dx);
+    p.xv += speed * Math.sin(p.dx);
+    p.yv += speed * Math.sin(p.dy);
+    p.zv += speed * Math.cos(p.dx);
 };
 
 export function applyForce(p, force) {
@@ -51,8 +52,8 @@ export function applyForce(p, force) {
 };
 
 export function pointAt(p, x, y, z) {
-    particle.dx = Math.atan2(y - p.y, x - p.x);
-    particle.dy = Math.atan2(z - p.z, distance2D(p.x, p.y, x, y));
+    p.dx = Math.atan2(y - p.y, x - p.x);
+    p.dy = Math.atan2(z - p.z, distance2D(p.x, p.y, x, y));
 };
 
 export function applyGravity(id) {
@@ -60,7 +61,7 @@ export function applyGravity(id) {
     for (let i = 0; i < particles.length; i++) {
         if (i !== id) {
             const other = particles[i];
-            const dist = distance3D(particle.x, particle.y, particle.z, other.x, other.y, other.z);
+            const dist = distance3D(p.x, p.y, p.z, other.x, other.y, other.z);
             if (dist > 0.1) {
                 const force = physics.GRAVITY * (other.mass * particle.mass) / (dist * dist);
                 pointAt(p, other.x, other.y, other.z);
@@ -75,7 +76,7 @@ export function updateParticle(id) {
         return;
     }
     var part = particles[id];
-    applyGravity(id);
+    // applyGravity(id);
     part.x += part.xv * deltaTime;
     part.y += part.yv * deltaTime;
     part.z += part.zv * deltaTime;

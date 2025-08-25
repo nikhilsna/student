@@ -29,7 +29,7 @@ export var focalLength = 0;
 
 export function setUpEnvironment(screen) {
     const rads = (camera.FOV * Math.PI) / 180;
-    focalLength = screen.width / Math.tan(rads / 2);
+    focalLength = screen.width / (2 * Math.tan(rads / 2));
 };
 
 export function goTo(x, y, z) {
@@ -41,7 +41,7 @@ export function goTo(x, y, z) {
     const rz = rotate(point.x, point.y, camera.rotation.z);
     vec3(rz.x, rz.y, point.z);
     if (point.z < 0.1) {
-        point.z = 0.1;
+        return null;
     }
     vec3(focalLength * (point.x / point.z), focalLength * (point.y / point.z), point.z);
     return {x: point.x, y: point.y};

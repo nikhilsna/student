@@ -30,14 +30,17 @@ title: Particles
                 const p = particles[i];
                 updateParticle(i);
                 const point = goTo(p.x,p.y,p.z);
-                ctx.fillStyle = 'white';
-                ctx.fillRect(point.x + (canvas.width/2), -point.y + (canvas.height/2), 10, 10)
+                console.log(point);
+                if (point !== null) {
+                  ctx.fillStyle = 'white';
+                  ctx.fillRect(point.x + (canvas.width/2), -point.y + (canvas.height/2), 10, 10)
+                }
             }
         };
         setUpParticles(50);
         setUpEnvironment(canvas);
         function update() {
-            ctx.clearRect(0,0,canvas.with,canvas.height);
+            ctx.clearRect(0,0,canvas.width,canvas.height);
             renderParts();
             requestAnimationFrame(update);
         };
