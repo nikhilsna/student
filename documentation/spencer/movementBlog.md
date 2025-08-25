@@ -57,7 +57,7 @@ What’s happening here?
 2. `Math.atan2(dy, dx)` calculates the angle between them (in radians).
 3. Multiply by `180 / Math.PI` to turn that into **degrees**.
 
-➡️ In simple terms: this makes the player **face the thing at `(x, y)`**.
+In simple terms: this makes the player **face the thing at `(x, y)`**.
 
 ---
 
