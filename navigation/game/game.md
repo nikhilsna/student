@@ -20,24 +20,51 @@
             <h1 style="font-size:3em;margin-bottom:1em;">Bumper Cars</h1>
             <button id="startBtn" style="font-size:2em;padding:0.5em 2em;">Start Game</button>
         </div>
+        <div id="deathScreen" style="position:absolute;top:0;left:0;width:800px;height:600px;background:rgba(0,0,0,0.8);color:white;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:20;">
+        <h1 style="font-size:3em;margin-bottom:1em;">You Died</h1>
+        <button id="restartBtn" style="font-size:2em;padding:0.5em 2em;">Restart</button>
+        </div>
     </div>
   <script type="module">
-    import {player, pointAt, move} from './move.js';
-    import {camera} from './camera.js';
-    import {tiles, addTile} from './tile.js';
-    import {checkOnscreen} from './screen.js';
-    import {distance, updCollide} from './collide.js';
+    import { player, pointAt, move } from './move.js';
+    import { camera, updateCamera, setCameraTarget } from './camera.js';
+    import { tiles, addTile } from './tile.js';
+    import { checkOnscreen } from './screen.js';
+    import { distance, updCollide } from './collide.js';
+    import { enemy, enemies, addEnemy, updEnemies, spawnEnemies } from './enemy.js';
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     const mainMenu = document.getElementById('mainMenu');
     const startBtn = document.getElementById('startBtn');
+    const deathScreen = document.getElementById('deathScreen');
+    const restartBtn = document.getElementById('restartBtn');
     let gameStarted = false;
+    let gameOver = false;
     startBtn.addEventListener('click', () => {
       mainMenu.style.display = 'none';
       gameStarted = true;
       update();
       spawnTiles(3);
     });
+    //
+    restartBtn.addEventListener('click', () => {
+      deathScreen.style.display = 'none';
+      resetGame();
+      update();
+      spawnTiles(3);
+    });
+    // RESET FUNCTION
+    function resetGame() {
+      player.x = 0;
+      player.y = 0;
+      player.xv = 0;
+      player.yv = 0;
+      player.health = 100;
+      player.coins = 0;
+      gameOver = false;
+      tiles.length = 0; // clear tiles
+      playTime = 0;
+    }
     //
     const keys = {};
     function keysDetection() {
@@ -63,35 +90,32 @@
                     continue;
                 }
             }
-            if (!checkOnscreen(t.x, t.y, width, height)) {
-                tiles.splice(i,1);
-                i--;
-                continue;
-            }
-            if (t.type === 1) {
-                if (updCollide(player,t,20)) {
-                    pointAt(t.x,t.y);
-                    move(-1);
+            if (checkOnscreen(t.x, t.y, width, height)) {
+                if (t.type === 1) {
+                    if (updCollide(player,t,20)) {
+                        pointAt(t.x,t.y);
+                        move(-1);
+                    }
+                    ctx.fillStyle = 'grey';
+                    ctx.fillRect((t.x-camera.x) + (canvas.width-10), (t.y-camera.y) + (canvas.height-10), 20, 20);
+                } else if (t.type === 2) {
+                    if (updCollide(player,t,20)) {
+                        console.log("collide")
+                        player.health -= 1;
+                        pointAt(t.x,t.y);
+                        move(-5);
+                    }
+                    ctx.fillStyle = 'red';
+                    ctx.fillRect((t.x-camera.x) + (canvas.width/2)-10, (t.y-camera.y) + (canvas.height/2)-10, 20, 20);
+                } else if (t.type === 3) {
+                    if (updCollide(player,t,20)) {
+                        player.coins += 1;
+                        tiles.splice(i,1);
+                        i--;
+                    }
+                    ctx.fillStyle = 'yellow';
+                    ctx.fillRect((t.x-camera.x) + (canvas.width/2)-5, (t.y-camera.y) + (canvas.height/2)-5, 10, 10);
                 }
-                ctx.fillStyle = 'grey';
-                ctx.fillRect((t.x-camera.x) + (canvas.width-10), (t.y-camera.y) + (canvas.height-10), 20, 20);
-            } else if (t.type === 2) {
-                if (updCollide(player,t,20)) {
-                    console.log("collide")
-                    player.health -= 1;
-                    pointAt(t.x,t.y);
-                    move(-5);
-                }
-                ctx.fillStyle = 'red';
-                ctx.fillRect((t.x-camera.x) + (canvas.width/2)-10, (t.y-camera.y) + (canvas.height/2)-10, 20, 20);
-            } else if (t.type === 3) {
-                if (updCollide(player,t,20)) {
-                    player.coins += 1;
-                    tiles.splice(i,1);
-                    i--;
-                }
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect((t.x-camera.x) + (canvas.width/2)-5, (t.y-camera.y) + (canvas.height/2)-5, 10, 10);
             }
         }
     };
@@ -104,8 +128,8 @@
             console.log(Math.floor(playTime/1000))
             let rand = (Math.random()*2)-1;
             const temp = {
-                x: Math.floor(rand*(canvas.width/2-20))+camera.x,
-                y: Math.floor(rand*(canvas.height/2-20))+camera.y,
+                x: Math.floor(rand*(canvas.width/2-20)+camera.x),
+                y: Math.floor(rand*(canvas.height/2-20)+camera.y),
             };
             addTile(temp.x,temp.y,Math.floor((Math.random()+1)*2));
             console.log(tiles)
@@ -128,10 +152,18 @@
                 player.y = -height;
             }
         }
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(6-camera.x, 6-camera.y, canvas.width-14, canvas.height-14);
     };
     var playTime = 0;
     function update() {
+        if (gameOver) return;
         ctx.clearRect(0,0,canvas.width,canvas.height);
+        //
+        setCameraTarget(player);
+        updateCamera();
+        //
         playTime += 0.1;
         drawTiles(canvas.width, canvas.height);
         keysDetection();
@@ -140,11 +172,14 @@
         player.x += player.xv;
         player.y += player.yv;
         border(canvas.width/2 - 20, canvas.height/2 - 20);
-        if (player.health < 0) {
+        if (player.health <= 0) {
             player.health = 0;
+            gameOver = true;
+            deathScreen.style.display = 'flex';
+            return;
         }
         ctx.fillStyle = 'blue';
-        ctx.fillRect(player.x+(canvas.width/2)-12.5,player.y+(canvas.height/2)-12.5,25,25);
+        ctx.fillRect((player.x-camera.x)+(canvas.width/2)-12.5,(player.y-camera.y)+(canvas.height/2)-12.5,25,25);
         drawText();
         requestAnimationFrame(update);
     };
@@ -154,7 +189,6 @@
     document.addEventListener('keyup', (e) => {
         keys[e.key.toLowerCase()] = false;
     });
-    // Game does not start until Start Game is clicked
   </script>
 </body>
 </html>
