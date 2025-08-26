@@ -94,10 +94,10 @@
                 if (t.type === 1) {
                     if (updCollide(player,t,20)) {
                         pointAt(t.x,t.y);
-                        move(-1);
+                        move(distance(0,0,player.xv,player.yv));
                     }
-                    ctx.fillStyle = 'grey';
-                    ctx.fillRect((t.x-camera.x) + (canvas.width-10), (t.y-camera.y) + (canvas.height-10), 20, 20);
+                    ctx.fillStyle = 'black';
+                    ctx.fillRect((t.x-camera.x) + (canvas.width/2)-10, (t.y-camera.y) + (canvas.height/2)-10, 20, 20);
                 } else if (t.type === 2) {
                     if (updCollide(player,t,20)) {
                         console.log("collide")
@@ -131,7 +131,8 @@
                 x: Math.floor(rand*(canvas.width/2-20)+camera.x),
                 y: Math.floor(rand*(canvas.height/2-20)+camera.y),
             };
-            addTile(temp.x,temp.y,Math.floor((Math.random()+1)*2));
+            const t = Math.floor(Math.random() * 3) + 1;
+            addTile(temp.x,temp.y,Math.floor(t));
             console.log(tiles)
         }
     };
