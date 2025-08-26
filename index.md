@@ -252,12 +252,6 @@ hide: true
 <hr class="divider">
 
 <h3>
-    <a href="{{site.baseurl}}/teamtools" class="project-link">
-        Team Tools
-    </a>
-    <a href="{{site.baseurl}}/apilesson" class="project-link">
-    APIs Lesson
-    </a>
     <a href="{{site.baseurl}}/apcsp" class="project-link">
         AP CSP Study Prep
     </a>
