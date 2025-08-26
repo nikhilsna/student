@@ -20,6 +20,10 @@
             <h1 style="font-size:3em;margin-bottom:1em;">Bumper Cars</h1>
             <button id="startBtn" style="font-size:2em;padding:0.5em 2em;">Start Game</button>
         </div>
+        <div id="deathScreen" style="position:absolute;top:0;left:0;width:800px;height:600px;background:rgba(0,0,0,0.8);color:white;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:20;">
+        <h1 style="font-size:3em;margin-bottom:1em;">You Died</h1>
+        <button id="restartBtn" style="font-size:2em;padding:0.5em 2em;">Restart</button>
+        </div>
     </div>
   <script type="module">
     import { player, pointAt, move } from './move.js';
@@ -32,13 +36,35 @@
     const ctx = canvas.getContext('2d');
     const mainMenu = document.getElementById('mainMenu');
     const startBtn = document.getElementById('startBtn');
+    const deathScreen = document.getElementById('deathScreen');
+    const restartBtn = document.getElementById('restartBtn');
     let gameStarted = false;
+    let gameOver = false;
     startBtn.addEventListener('click', () => {
       mainMenu.style.display = 'none';
       gameStarted = true;
       update();
       spawnTiles(3);
     });
+    //
+    restartBtn.addEventListener('click', () => {
+      deathScreen.style.display = 'none';
+      resetGame();
+      update();
+      spawnTiles(3);
+    });
+    // RESET FUNCTION
+    function resetGame() {
+      player.x = 0;
+      player.y = 0;
+      player.xv = 0;
+      player.yv = 0;
+      player.health = 100;
+      player.coins = 0;
+      gameOver = false;
+      tiles.length = 0; // clear tiles
+      playTime = 0;
+    }
     //
     const keys = {};
     function keysDetection() {
@@ -132,6 +158,7 @@
     };
     var playTime = 0;
     function update() {
+        if (gameOver) return;
         ctx.clearRect(0,0,canvas.width,canvas.height);
         //
         setCameraTarget(player);
@@ -145,8 +172,11 @@
         player.x += player.xv;
         player.y += player.yv;
         border(canvas.width/2 - 20, canvas.height/2 - 20);
-        if (player.health < 0) {
+        if (player.health <= 0) {
             player.health = 0;
+            gameOver = true;
+            deathScreen.style.display = 'flex';
+            return;
         }
         ctx.fillStyle = 'blue';
         ctx.fillRect((player.x-camera.x)+(canvas.width/2)-12.5,(player.y-camera.y)+(canvas.height/2)-12.5,25,25);
