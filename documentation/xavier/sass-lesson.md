@@ -5,55 +5,14 @@ permalink: /sass-lesson/
 ---
 
 ## SASS Lesson
-SASS stands for Syntactically Awesome Stylesheet and can be considered an "upgrade" to CSS. In terms of Open Coding Society and its child repositories, SASS serves as a means of centralizing and organizing styles for the entire site. So let's take a look on how's it organized in OCS and how to modify it.
+SASS stands for Syntactically Awesome Style Sheets and for good reason! It is quite awesome and in many regards an upgrade to CSS. Understanding how SASS works allows you to style your website more effectively, with a more organized framework, and makes the overall styles simpler.
 
-### How's it Organized
-On your own repository, you'll be able to find a folder called `_sass`. In this file is where all your modifications can be made.
+While this lesson will cover the fundamentals, more niche features can be found in the <a href="https://sass-lang.com/" target="_blank">official documentation</a>. 
 
-Folder and subfolders:
-```
-- _sass
- - midnight
- - minima
- - nighthawk
-```
-
-An important thing to know is how sass is adding onto the styles that are imported by jekyll themes (OCS has it defaulted to a type of minima style), and so to modify these styles by minima, you must go to `_sass/minima/custom-styles.scss`
-
-Let's take a deeper look into this file --->
-
-**_sass/minima/custom-styles.scss:**
-
-```
-@import "nighthawk/main";
-```
-
-You may be asking yourself: **WHERE THE HECK ARE THE STYLES???**
-
-And that is a valid question! And to find out, we need to recognize that the styles are being imported from `_sass/nighthawk/_main.scss` SO, LET's TAKE A LOOK!
-
-```
-@import "platformer-game";
-@import "chatbot";
-@import "hacks";
-@import "navbar";
-@import "bathroom";
-@import "hallpass";
-@import "search";
-@import "calendar";
-@import "blogs";
-// aesthetihawk stuff
-@import "materials/main.scss";
-@import "elements/main.scss";
+### How it Works
+SASS is a preprocessor, meaning it will take your SASS file, process it, and convert it into a CSS file that can be used by the actual site.
 
 
-html,
-body,
-input,
-textarea,
-select {
-    background-color: $background;
-}
-```
+### How it's Organized
 
-It is indeed more imports to other files, but let's choose `navbar.scss` to analyze.
+### How to Modify
