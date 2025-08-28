@@ -104,10 +104,10 @@
 
     const keys = {};
     function keysDetection() {
-    if (keys["w"] || keys["ArrowUp"]) player.yv -= player.speed;
-    if (keys["s"] || keys["ArrowDown"]) player.yv += player.speed;
-    if (keys["a"] || keys["ArrowLeft"]) player.xv -= player.speed;
-    if (keys["d"] || keys["ArrowRight"]) player.xv += player.speed;
+        if (keys["w"] || keys["ArrowUp"]) player.yv -= player.speed;
+        if (keys["s"] || keys["ArrowDown"]) player.yv += player.speed;
+        if (keys["a"] || keys["ArrowLeft"]) player.xv -= player.speed;
+        if (keys["d"] || keys["ArrowRight"]) player.xv += player.speed;
     };
     function drawText() {
         ctx.font = '24px Arial';
