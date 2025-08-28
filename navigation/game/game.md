@@ -1,39 +1,39 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Bumper Cars Game</title>
-  <style>
+---
+layout: base
+title: Game
+---
+
+<style>
     canvas {
-      border: 1px solid #333;
-      background: #b7b7b7ff;
-      display: block;
-      margin: 20px auto;
+        border: 1px solid #333;
+        background: #b7b7b7ff;
+        display: block;
+        margin: 20px auto;
     }
 
     /* Shared style for all image buttons */
     .imgButton {
-      width: 200px;
-      height: 60px;
-      background-size: cover;
-      background-position: center;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5em;
-      color: white;
-      text-shadow: 1px 1px 2px black;
-      transition: transform 0.1s;
-      margin: 0.5em 0;
+        width: 200px;
+        height: 60px;
+        background-size: cover;
+        background-position: center;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        color: white;
+        text-shadow: 1px 1px 2px black;
+        transition: transform 0.1s;
+        margin: 0.5em 0;
     }
 
     .imgButton:hover {
-      transform: scale(1.05);
+        transform: scale(1.05);
     }
-  </style>
-</head>
-<body>
+</style>
+
 <div style="position:relative; width:800px; height:600px; margin:0 auto;">
     <canvas id="gameCanvas" width="800" height="600"></canvas>
     <!-- Main Menu -->
@@ -309,5 +309,3 @@ canvas.addEventListener("click", (e) => {
     shootBullet(worldX, worldY, player.gun);
 });
 </script>
-</body>
-</html>

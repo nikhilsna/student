@@ -29,6 +29,25 @@ A very helpful way of keeping styles consistent is defining colors as certain va
 $variable: value;
 ```
 
+#### Nesting
+CSS doesn't allow for nesting, while SASS does. As you should know with HTML, it keeps things simpler to visualize than without it.
+
+SASS Version:
+```
+body {
+    h1 {
+        font-style: oblique;
+    }
+}
+```
+
+CSS Version:
+```
+body h1 {
+    font-style: oblique;
+}
+```
+
 ### How it's Organized
 
 ### How to Modify
