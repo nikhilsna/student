@@ -12,7 +12,7 @@ title: Game
     }
 
     /* Shared style for all image buttons */
-    .imgButton {
+    .image-button {
         width: 200px;
         height: 60px;
         background-size: cover;
@@ -29,36 +29,92 @@ title: Game
         margin: 0.5em 0;
     }
 
-    .imgButton:hover {
+    .image-button:hover {
         transform: scale(1.05);
     }
+
+    .main-menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 800px;
+        height: 600px;
+        background: #eee;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    .death-screen {
+        position: absolute;
+        top: 0;
+        left 0;
+        width: 801px;
+        height: 601px;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+    }
+
+    .upgrade-menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 800px;
+        height: 600px;
+        background: #ddd;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+    }
+
+    .pause-menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 800px;
+        height: 600px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 4;
+    }    
 </style>
 
 <div style="position:relative; width:800px; height:600px; margin:0 auto;">
     <canvas id="gameCanvas" width="800" height="600"></canvas>
     <!-- Main Menu -->
-    <div id="mainMenu" style="position:absolute;top:0;left:0;width:800px;height:600px;background:#eee;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;">
+    <div id="mainMenu" class="main-menu">
         <h1 style="font-size:3em;margin-bottom:1em;">Dungeon Crawl</h1>
-        <div id="startBtn" class="imgButton"></div>
+        <div id="startBtn" class="image-button"></div>
     </div>
     <!-- Death Screen -->
-    <div id="deathScreen" style="position:absolute;top:0;left:0;width:801px;height:601px;background:rgba(0,0,0,0.8);color:white;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:20;">
+    <div id="deathScreen" class="death-screen">
         <h1 style="font-size:3em;margin-bottom:1em;">You Died</h1>
-        <div id="restartBtn" class="imgButton">Restart</div>
+        <div id="restartBtn" class="image-button">Restart</div>
     </div>
     <!-- Upgrades Menu -->
-    <div id="upgradeMenu" style="position:absolute;top:0;left:0;width:800px;height:600px;background:#ddd;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:15;">
+    <div id="upgradeMenu" class="upgrade-menu">
         <h1 style="font-size:2.5em;margin-bottom:1em;">Upgrades</h1>
-        <div id="upgradeHealth" class="imgButton">Increase Health (5 coins)</div>
-        <div id="upgradeSpeed" class="imgButton">Increase Speed (5 coins)</div>
-        <div id="closeUpgrades" class="imgButton">Back to Game</div>
+        <div id="upgradeHealth" class="image-button">Increase Health (5 coins)</div>
+        <div id="upgradeSpeed" class="image-button">Increase Speed (5 coins)</div>
+        <div id="closeUpgrades" class="image-button">Back to Game</div>
     </div>
     <!-- Pause Menu -->
-    <div id="pauseMenu" style="position:absolute;top:0;left:0;width:800px;height:600px;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:25;">
+    <div id="pauseMenu" class="pause-menu">
         <h1 style="font-size:3em;margin-bottom:1em;color:white;">Paused</h1>
-        <div id="resumeBtn" class="imgButton">Resume</div>
-        <div id="pauseUpgradesBtn" class="imgButton">Upgrades</div>
-        <div id="quitBtn" class="imgButton">Quit to Main Menu</div>
+        <div id="resumeBtn" class="image-button">Resume</div>
+        <div id="pauseUpgradesBtn" class="image-button">Upgrades</div>
+        <div id="quitBtn" class="image-button">Quit to Main Menu</div>
     </div>
 </div>
 
