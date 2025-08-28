@@ -5,11 +5,12 @@ export const player = {
     y: 0,
     xv: 0,
     yv: 0,
-    speed: 0.7,
+    speed: 0.6,
     dir: 0,
     health: 100,
     coins: 0,
     ammo: 3,
+    gun: 2,
 };
 
 export function pointAt(x,y) {

@@ -1,5 +1,5 @@
 import { player, pointAt, move } from './move.js';
-import { distance } from './collide.js';
+import { distance, updCollide } from './collide.js';
 import { camera } from './camera.js';
 import { bullets } from './bullet.js';
 import { checkOnscreen } from './screen.js';
@@ -44,7 +44,7 @@ function collideEnemy(e) {
 function collideBullets(e, id, bullets) {
     for (let i = 0; i < bullets.length; i++) {
         const b = bullets[i];
-        if (distance(e.x, e.y, b.x, b.y) < 10) {
+        if (updCollide(e, b, 20)) {
             e.health -= 50;
             bullets.splice(i, 1);
             if (e.health <= 0) {
