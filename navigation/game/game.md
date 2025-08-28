@@ -38,7 +38,7 @@ title: Game
     <canvas id="gameCanvas" width="800" height="600"></canvas>
     <!-- Main Menu -->
     <div id="mainMenu" style="position:absolute;top:0;left:0;width:800px;height:600px;background:#eee;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;">
-        <h1 style="font-size:3em;margin-bottom:1em;">Bumper Cars</h1>
+        <h1 style="font-size:3em;margin-bottom:1em;">Dungeon Crawl</h1>
         <div id="startBtn" class="imgButton"></div>
     </div>
     <!-- Death Screen -->
