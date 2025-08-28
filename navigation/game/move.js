@@ -1,4 +1,4 @@
-import {camera} from './camera.js';
+import { camera } from './camera.js';
 
 export const player = {
     x: 0,
@@ -9,6 +9,7 @@ export const player = {
     dir: 0,
     health: 100,
     coins: 0,
+    ammo: 3,
 };
 
 export function pointAt(x,y) {

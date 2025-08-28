@@ -14,19 +14,16 @@
 <body>
     <div style="position:relative; width:800px; height:600px; margin:0 auto;">
         <canvas id="gameCanvas" width="800" height="600"></canvas>
-        
         <!-- Main Menu -->
         <div id="mainMenu" style="position:absolute;top:0;left:0;width:800px;height:600px;background:#eee;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;">
             <h1 style="font-size:3em;margin-bottom:1em;">Bumper Cars</h1>
             <button id="startBtn" style="font-size:2em;padding:0.5em 2em;">Start Game</button>
         </div>
-
         <!-- Death Screen -->
-        <div id="deathScreen" style="position:absolute;top:0;left:0;width:800px;height:600px;background:rgba(0,0,0,0.8);color:white;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:20;">
+        <div id="deathScreen" style="position:absolute;top:0;left:0;width:801px;height:601px;background:rgba(0,0,0,0.8);color:white;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:20;">
             <h1 style="font-size:3em;margin-bottom:1em;">You Died</h1>
             <button id="restartBtn" style="font-size:2em;padding:0.5em 2em;">Restart</button>
         </div>
-
         <!-- Upgrades Menu -->
         <div id="upgradeMenu" style="position:absolute;top:0;left:0;width:800px;height:600px;background:#ddd;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:15;">
             <h1 style="font-size:2.5em;margin-bottom:1em;">Upgrades</h1>
@@ -42,6 +39,8 @@
     import { tiles, addTile } from './tile.js';
     import { checkOnscreen } from './screen.js';
     import { distance, updCollide } from './collide.js';
+    import { enemy, enemies, addEnemy, updEnemies,  } from './enemy.js';
+    import { bullets, updBullets, shootBullet } from './bullet.js';
 
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
@@ -99,16 +98,16 @@
       player.health = 100;
       player.coins = 0;
       gameOver = false;
-      tiles.length = 0;
+      enemies.length = 0;
       playTime = 0;
     }
 
     const keys = {};
     function keysDetection() {
-        if (keys["w"] || keys["ArrowUp"]) player.yv -= player.speed;
-        if (keys["s"] || keys["ArrowDown"]) player.yv += player.speed;
-        if (keys["a"] || keys["ArrowLeft"]) player.xv -= player.speed;
-        if (keys["d"] || keys["ArrowRight"]) player.xv += player.speed;
+    if (keys["w"] || keys["ArrowUp"]) player.yv -= player.speed;
+    if (keys["s"] || keys["ArrowDown"]) player.yv += player.speed;
+    if (keys["a"] || keys["ArrowLeft"]) player.xv -= player.speed;
+    if (keys["d"] || keys["ArrowRight"]) player.xv += player.speed;
     };
     function drawText() {
         ctx.font = '24px Arial';
@@ -138,13 +137,9 @@
                     ctx.fillStyle = 'black';
                     ctx.fillRect((t.x-camera.x) + (canvas.width/2)-10, (t.y-camera.y) + (canvas.height/2)-10, 20, 20);
                 } else if (t.type === 2) {
-                    if (updCollide(player,t,20)) {
-                        player.health -= 1;
-                        pointAt(t.x,t.y);
-                        move(-5);
-                    }
-                    ctx.fillStyle = 'red';
-                    ctx.fillRect((t.x-camera.x) + (canvas.width/2)-10, (t.y-camera.y) + (canvas.height/2)-10, 20, 20);
+                    addEnemy(t.x, t.y);
+                    tiles.splice(i,1);
+                    i--;
                 } else if (t.type === 3) {
                     if (updCollide(player,t,20)) {
                         player.coins += 1;
@@ -190,12 +185,14 @@
 
     var playTime = 0;
     function update() {
-        if (gameOver || paused) return; // <--- pause check
+        if (gameOver || paused) return; // pause check
         ctx.clearRect(0,0,canvas.width,canvas.height);
         setCameraTarget(player);
         updateCamera();
         playTime += 0.1;
         drawTiles(canvas.width, canvas.height);
+        updEnemies(ctx, canvas, player);
+        updBullets(ctx, canvas);
         keysDetection();
         player.xv *= 0.9;
         player.yv *= 0.9;
@@ -214,7 +211,6 @@
         requestAnimationFrame(update);
     };
 
-    // --- Open upgrades menu with U ---
     document.addEventListener('keydown', (e) => {
         if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
             e.preventDefault();
@@ -227,6 +223,19 @@
     });
     document.addEventListener('keyup', (e) => {
         keys[e.key.toLowerCase()] = false;
+    });
+    canvas.addEventListener("click", (e) => {
+        const rect = canvas.getBoundingClientRect();
+
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // Convert to world position (taking camera offset into account)
+        const worldX = (mouseX - canvas.width/2) + camera.x;
+        const worldY = (mouseY - canvas.height/2) + camera.y;
+
+        if (player.ammo <= 0) return;
+        shootBullet(worldX, worldY);
     });
   </script>
 </body>
