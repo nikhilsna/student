@@ -168,8 +168,9 @@ function resetGame() {
     player.coins = 0;
     gameOver = false;
     enemies.length = 0;
+    tiles.length = 0;
     playTime = 0;
-}
+};
 
 const keys = {};
 function keysDetection() {
