@@ -48,6 +48,12 @@ body h1 {
 }
 ```
 
+#### Mixins
+SASS mixins are conceptually the functions of SASS. They allow you to define multiple styles and reference them when you want to call those specific styles.
+
+To define a mixin, use the following syntax: `@mixin mixin-name {styles here}`
+
+
 ### How it's Organized
 
 ### How to Modify
