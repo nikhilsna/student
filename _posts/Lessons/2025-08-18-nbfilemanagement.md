@@ -137,6 +137,22 @@ textarea {
 }
 </style>
 
+<script>
+// Auto-save FRQ responses into localStorage
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".frq-box textarea").forEach((textarea, index) => {
+    const key = "frq_answer_" + index;
 
+    // Load saved value if it exists
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      textarea.value = saved;
+    }
 
-
+    // Save on input
+    textarea.addEventListener("input", () => {
+      localStorage.setItem(key, textarea.value);
+    });
+  });
+});
+</script>

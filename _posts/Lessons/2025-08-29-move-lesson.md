@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Movement Blog
+permalink: /movelesson
+categories: ['Lesson']
 ---
 
 # Lesson: Physics-Based Movement in Games
