@@ -1,109 +1,116 @@
-import { player, pointAt, move } from './move.js';
-import { distance, updCollide } from './collide.js';
+import { Player } from './move.js';
+import { GameObject } from './collide.js';
 import { camera } from './camera.js';
 import { bullets } from './bullet.js';
 import { checkOnscreen } from './screen.js';
 
-export const enemy = {
-    x: 0,
-    y: 0,
-    xv: 0,
-    yv: 0,
-    speed: 0.2,
-    dir: 0,
-    health: 100,
-};
+export class Enemy {
+    constructor(x, y, speed = 0.2, health = 100) {
+        this.x = x;
+        this.y = y;
+        this.xv = 0;
+        this.yv = 0;
+        this.speed = speed;
+        this.dir = 0;
+        this.health = health;
+    }
 
-export var enemies = [];
+    pointAt(x, y) {
+        const dx = x - this.x;
+        const dy = y - this.y;
+        this.dir = Math.atan2(dy, dx) * (180 / Math.PI);
+    }
 
-export function addEnemy(x, y) {
-    const newEnemy = {
-        x: x,
-        y: y,
-        xv: 0,
-        yv: 0,
-        speed: enemy.speed,
-        dir: 0,
-        health: 100,
-    };
-    enemies.push(newEnemy);
-};
+    move(speed) {
+        const angle = this.dir * (Math.PI / 180);
+        this.xv += Math.cos(angle) * speed;
+        this.yv += Math.sin(angle) * speed;
+    }
 
-function collideEnemy(e) {
-    for (let i = 0; i < enemies.length; i++) {
-        const other = enemies[i];
-        if (e !== other) {
-            if (distance(e.x, e.y, other.x, other.y) < 20) {
-                pointAtEnemy(e, other.x, other.y) * (Math.PI / 180);
-                moveEnemy(e, -e.speed);
+    collideWithEnemies(enemies) {
+        for (let other of enemies) {
+            if (this !== other) {
+                if (GameObject.distance(this.x, this.y, other.x, other.y) < 20) {
+                    this.pointAt(other.x, other.y);
+                    this.move(-this.speed);
+                }
             }
         }
     }
-};
 
-function collideBullets(e, id, bullets) {
-    for (let i = 0; i < bullets.length; i++) {
-        const b = bullets[i];
-        if (updCollide(e, b, 20)) {
-            e.health -= 50;
-            bullets.splice(i, 1);
-            if (e.health <= 0) {
-                player.coins += 1;
-                enemies.splice(id, 1);
+    collideWithBullets(enemies, id, bullets, player) {
+        for (let i = 0; i < bullets.length; i++) {
+            const b = bullets[i];
+            if (GameObject.collide(this, b, 20)) {
+                this.health -= 50;
+                bullets.splice(i, 1);
+                if (this.health <= 0) {
+                    player.coins += 1;
+                    enemies.splice(id, 1);
+                }
+                i--;
             }
-            i--;
         }
     }
-};
 
-export function updEnemies(ctx, canvas, target) {
-    for (let i = 0; i < enemies.length; i++) {
-        const e = enemies[i];
-        if (e.health <= 0) {
-            enemies.splice(i, 1);
-            i--;
-            continue;
+    update(ctx, canvas, target, enemies, id, player) {
+        if (this.health <= 0) {
+            enemies.splice(id, 1);
+            return;
         }
-        pointAtEnemy(e, target.x, target.y);
-        moveEnemy(e, e.speed);
-        e.xv *= 0.9;
-        e.yv *= 0.9;
-        e.x += e.xv;
-        e.y += e.yv;
-        if (distance(e.x, e.y, target.x, target.y) < 25) {
+
+        this.pointAt(target.x, target.y);
+        this.move(this.speed);
+
+        this.xv *= 0.9;
+        this.yv *= 0.9;
+        this.x += this.xv;
+        this.y += this.yv;
+
+        if (GameObject.distance(this.x, this.y, target.x, target.y) < 25) {
             target.health -= 1;
-            pointAt(e.x, e.y);
-            move(-2);
+            target.pointAt(this.x, this.y);
+            target.move(-2);
         }
-        collideEnemy(e);
-        collideBullets(e, i, bullets);
-        if (!checkOnscreen(e.x, e.y, canvas.width, canvas.height)) {
-            continue;
+
+        this.collideWithEnemies(enemies);
+        this.collideWithBullets(enemies, id, bullets, player);
+
+        if (!checkOnscreen(this.x, this.y, canvas.width, canvas.height)) {
+            return;
         }
+
         ctx.fillStyle = 'red';
-        ctx.fillRect((e.x - camera.x) + (canvas.width / 2) - 10, (e.y - camera.y) + (canvas.height / 2) - 10, 20, 20);
+        ctx.fillRect(
+            (this.x - camera.x) + (canvas.width / 2) - 10,
+            (this.y - camera.y) + (canvas.height / 2) - 10,
+            20,
+            20
+        );
     }
-};
+}
 
-export function spawnEnemies(count, canvas) {
-    for (let i = 0; i < count; i++) {
-        let rand = (Math.random() * 2) - 1;
-        const temp = {
-            x: Math.floor(rand * (canvas.width / 2 - 20)) + camera.x,
-            y: Math.floor(rand * (canvas.height / 2 - 20)) + camera.y,
-        };
-        addEnemy(temp.x, temp.y);
+export class EnemyManager {
+    constructor() {
+        this.enemies = [];
     }
-};
 
-export function pointAtEnemy(e, x, y) {
-    const dx = x - e.x;
-    const dy = y - e.y;
-    e.dir = Math.atan2(dy, dx) * (180 / Math.PI);
-};
+    addEnemy(x, y) {
+        this.enemies.push(new Enemy(x, y));
+    }
 
-export function moveEnemy(e, speed) {
-    const angle = e.dir * (Math.PI / 180);
-    e.xv += Math.cos(angle) * speed;
-    e.yv += Math.sin(angle) * speed;
-};
+    spawnEnemies(count, canvas) {
+        for (let i = 0; i < count; i++) {
+            let rand = (Math.random() * 2) - 1;
+            const x = Math.floor(rand * (canvas.width / 2 - 20)) + camera.x;
+            const y = Math.floor(rand * (canvas.height / 2 - 20)) + camera.y;
+            this.addEnemy(x, y);
+        }
+    }
+
+    updateAll(ctx, canvas, target, player) {
+        for (let i = 0; i < this.enemies.length; i++) {
+            this.enemies[i].update(ctx, canvas, target, this.enemies, i, player);
+        }
+    }
+}
