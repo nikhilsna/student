@@ -5,106 +5,151 @@ title: Jekyll Themes
 categories: ['Lesson']
 ---
 
-## Lesson 3: Jekyll Themes
+<h2>Lesson 3: Jekyll Themes</h2>
 
-### Introduction
+<h3>Introduction</h3>
+<p>
+Jekyll themes provide a powerful way to quickly style and structure your GitHub Pages website without extensive CSS coding. 
+This lesson delves into how Jekyll themes work, how to switch between them, and how to troubleshoot common issues, 
+enabling you to effectively manage your site’s visual presentation.
+</p>
 
-Jekyll themes provide a powerful way to quickly style and structure your GitHub Pages website without extensive CSS coding. This lesson delves into how Jekyll themes work, how to switch between them, and how to troubleshoot common issues, enabling you to effectively manage your site\"s visual presentation.
+<hr>
 
-### Understanding Jekyll Themes
+<h3>Understanding Jekyll Themes</h3>
+<p>
+A Jekyll theme is a collection of layouts, includes, stylesheets, and scripts that define the look and feel of your website. 
+When you apply a theme, Jekyll uses these files to render your content consistently across all pages. 
+This modular approach allows for rapid development and easy customization.
+</p>
 
-A Jekyll theme is a collection of layouts, includes, stylesheets, and scripts that define the look and feel of your website. When you apply a theme, Jekyll uses these files to render your content consistently across all pages. This modular approach allows for rapid development and easy customization.
+<ul>
+  <li><b>Layouts:</b> HTML files (e.g., <code>default.html</code>, <code>page.html</code>, <code>post.html</code>) that provide the overall structure. Your content is injected into these layouts.</li>
+  <li><b>Includes:</b> Reusable HTML snippets (e.g., headers, footers, navigation menus).</li>
+  <li><b>Assets:</b> CSS, JavaScript, and images that control visual design and interactivity.</li>
+  <li><b>Configuration:</b> Theme-specific settings often defined in <code>_config.yml</code> or in the theme’s own configuration files.</li>
+</ul>
 
-Key aspects of Jekyll themes include:
+<div class="frq-box">
+  <b>FRQ 1:</b> Explain why Jekyll uses layouts and includes. How do these features make web development easier?<br><br>
+  <textarea rows="5" style="width:100%;" placeholder="Type your response here..."></textarea>
+</div>
 
-*   **Layouts:** These are HTML files (e.g., `default.html`, `page.html`, `post.html`) that provide the overall structure for different types of content. Your content is injected into these layouts.
-*   **Includes:** Reusable HTML snippets (e.g., headers, footers, navigation menus) that can be inserted into layouts or other pages.
-*   **Assets:** CSS, JavaScript, and image files that control the visual design and interactivity.
-*   **Configuration:** Theme-specific settings often defined within your `_config.yml` file or within the theme\"s own configuration files.
+<hr>
 
-### Theme Switching Guide
+<h3>Theme Switching Guide</h3>
+<p>
+Switching between Jekyll themes involves modifying your <code>_config.yml</code> file and ensuring that the necessary theme files are correctly referenced. 
+The process can be simplified using scripts or by directly editing the configuration.
+</p>
 
-Switching between Jekyll themes involves modifying your `_config.yml` file and ensuring that the necessary theme files are correctly referenced. The process can be simplified using scripts or by directly editing the configuration.
+<pre><code class="language-yaml">
+# Example snippet from _config.yml
+remote_theme: jekyll/minima
+</code></pre>
 
-#### Direct Theme Switching
+<div class="frq-box">
+  <b>FRQ 2:</b> Describe the role of <code>_config.yml</code> in Jekyll. Why is it important for themes?<br><br>
+  <textarea rows="5" style="width:100%;" placeholder="Type your response here..."></textarea>
+</div>
 
-To switch themes directly, you typically modify the `remote_theme` setting in your `_config.yml` file. For example, to switch from `minima` to `TeXt`:
+<hr>
 
-```yaml
-# _config.yml
+<h3>Theme Features (Minima vs. TeXt)</h3>
+<p>Different themes offer distinct features and design philosophies. Here’s a comparison of two popular Jekyll themes:</p>
 
-# To use Minima theme:
-# remote_theme: jekyll/minima
-# minima:
-#   skin: dark
+<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;">
+  <tr>
+    <th>Feature</th>
+    <th>Minima Theme</th>
+    <th>TeXt Theme</th>
+  </tr>
+  <tr>
+    <td><b>Design</b></td>
+    <td>Clean, minimal</td>
+    <td>Modern iOS 11-inspired</td>
+  </tr>
+  <tr>
+    <td><b>Dark Mode</b></td>
+    <td>Supported</td>
+    <td>Supported (6 skins)</td>
+  </tr>
+  <tr>
+    <td><b>Responsiveness</b></td>
+    <td>Mobile responsive</td>
+    <td>Mobile responsive</td>
+  </tr>
+  <tr>
+    <td><b>Math/Diagrams</b></td>
+    <td>Limited</td>
+    <td>MathJax & Mermaid supported</td>
+  </tr>
+</table>
 
-# To use TeXt theme:
-remote_theme: kitian616/jekyll-TeXt-theme
-text_theme:
-  type: website
-  skin: dark
-  highlight_theme: tomorrow-night
-  lang: en
-```
+<div class="frq-box">
+  <b>FRQ 3:</b> Compare the strengths of Minima and TeXt. Which would you choose and why?<br><br>
+  <textarea rows="5" style="width:100%;" placeholder="Type your response here..."></textarea>
+</div>
 
-After modifying `_config.yml`, it is often necessary to clean your Jekyll build cache and rebuild the site to ensure the new theme is applied correctly. This can typically be done using `make clean && make` if you have a Makefile configured for your project.
+<hr>
 
-#### Interactive Theme Switching (Advanced)
+<h3>Troubleshooting Theme Issues</h3>
+<ol>
+  <li><b>Missing SASS Variables:</b> Ensure your theme installation is complete.</li>
+  <li><b>Build Errors:</b> Run <code>make clean && make</code> or <code>bundle exec jekyll build</code>.</li>
+  <li><b>Theme Not Switching:</b> Double-check the <code>remote_theme</code> value in <code>_config.yml</code>.</li>
+  <li><b>Backup:</b> Always back up <code>_config.yml</code> before big changes.</li>
+</ol>
 
-For more complex projects or for development environments, you might use scripts to automate theme switching. This often involves maintaining separate configuration files for each theme (e.g., `_config.minima.yml`, `_config.text.yml`) and a script that copies the desired configuration to `_config.yml`.
+<div class="frq-box">
+  <b>FRQ 4:</b> A student’s theme won’t switch even after editing <code>_config.yml</code>. What steps would you take to troubleshoot?<br><br>
+  <textarea rows="5" style="width:100%;" placeholder="Type your response here..."></textarea>
+</div>
 
-For example, a `switch-theme.sh` script might look like this:
+<hr>
 
-```bash
-#!/bin/bash
+<h3>Conclusion</h3>
+<p>
+Jekyll themes are a powerful asset for creating visually appealing and functional GitHub Pages sites. 
+By understanding their structure, switching methods, and troubleshooting techniques, you can leverage themes to enhance your web projects and focus more on content creation rather than design details.
+</p>
 
-THEME=$1
+<div class="frq-box">
+  <b>FRQ 5:</b> Summarize in your own words why themes are valuable for developers using Jekyll.<br><br>
+  <textarea rows="5" style="width:100%;" placeholder="Type your response here..."></textarea>
+</div>
 
-if [ \"$THEME\" == \"minima\" ]; then
-  cp _config.minima.yml _config.yml
-  echo \"Switched to Minima theme.\"
-elif [ \"$THEME\" == \"text\" ]; then
-  cp _config.text.yml _config.yml
-  echo \"Switched to TeXt theme.\"
-else
-  echo \"Usage: ./scripts/switch-theme.sh [minima|text]\"
-  exit 1
-fi
+<style>
+.frq-box {
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 15px 0;
+  background: #f9f9f9;
+}
+textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 6px;
+}
+</style>
 
-make clean && make
-```
+<script>
+// Auto-save FRQ responses into localStorage
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".frq-box textarea").forEach((textarea, index) => {
+    const key = "jkyl_frq_answer_" + index;
 
-This script would be executed from your terminal: `./scripts/switch-theme.sh minima` or `./scripts/switch-theme.sh text`.
+    // Load saved response
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      textarea.value = saved;
+    }
 
-### Theme Features (Minima vs. TeXt)
-
-Different themes offer distinct features and design philosophies. Here\"s a comparison of two popular Jekyll themes:
-
-| Feature             | Minima Theme                               | TeXt Theme                                     |
-| :------------------ | :----------------------------------------- | :--------------------------------------------- |
-| **Design**          | Clean, minimal                             | Modern iOS 11-inspired                         |
-| **Dark Mode**       | Supported                                  | Supported (6 built-in skins)                   |
-| **Loading Speed**   | Fast                                       | Optimized                                      |
-| **Sub-themes**      | Multiple (dracula, leaf, hacker)           | N/A (uses skins)                               |
-| **Responsiveness**  | Mobile responsive                          | Mobile responsive                              |
-| **Search**          | Basic                                      | Advanced search functionality                  |
-| **Math/Diagrams**   | Limited                                    | MathJax & Mermaid diagram support              |
-| **Table of Contents** | No built-in                                | Yes                                            |
-| **Internationalization** | No built-in                                | Yes                                            |
-
-### Troubleshooting Theme Issues
-
-When encountering issues with Jekyll themes, consider the following diagnostic steps:
-
-1.  **Missing SASS Variables:** If a theme (like TeXt) expects specific SASS files or variables that are not present in your local `_sass` folder, you may need to create them or ensure your theme installation is complete.
-2.  **Build Errors:** Often, a `make clean && make` (or `bundle exec jekyll build` if not using a Makefile) command can resolve build errors by clearing the cache and rebuilding the site from scratch.
-3.  **Theme Not Switching:** Verify that your `_config.yml` file has been correctly updated with the new `remote_theme` setting. Incorrect paths or typos can prevent the theme from loading.
-4.  **Backup:** Always back up your `_config.yml` file before making significant changes. Many theme switching scripts automatically create backups (e.g., `_config.backup.yml`) to facilitate reverting changes if needed.
-
-### Conclusion
-
-Jekyll themes are a powerful asset for creating visually appealing and functional GitHub Pages sites. By understanding their structure, how to switch between them, and effective troubleshooting techniques, you can leverage themes to enhance your web development projects and focus more on content creation rather than intricate design details.
-
----
-
-
+    // Save on input
+    textarea.addEventListener("input", () => {
+      localStorage.setItem(key, textarea.value);
+    });
+  });
+});
+</script>

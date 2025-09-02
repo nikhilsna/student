@@ -18,5 +18,4 @@ export function updateCamera() {
 export function setCameraTarget(newTarget) {
     target.x = newTarget.x;
     target.y = newTarget.y;
-    target.zoom = newTarget.zoom || 1;
 };

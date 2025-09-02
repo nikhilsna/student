@@ -1,7 +1,11 @@
 ---
 layout: post
 title: Physics Based Movement
+permalink: /physics
+categories: ['Lesson']
 ---
+
+
 
 # Physics Based Movement
 
