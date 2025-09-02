@@ -253,7 +253,7 @@ hide: true
 
 <h3>
     <a href="{{site.baseurl}}/apcsp" class="project-link">
-        AP CSP Study Prep
+        AP CSP Study Prep!
     </a>
     <a href="{{site.baseurl}}/jp" class="project-link">
         Jupyter Notebooks and JS
