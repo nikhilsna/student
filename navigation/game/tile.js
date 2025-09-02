@@ -1,31 +1,50 @@
 
-import {camera} from './camera.js';
-import {checkOnscreen} from './screen.js';
+// tile.js
+import { camera } from './camera.js';
+import { checkOnscreen } from './screen.js';
 
-export const tile = {
-    type: 1,
-    x: 0,
-    y: 0,
-    col: 0,
-    life: 0,
-};
+class Tile {
+    constructor(x, y, type, col = 0, life = 0) {
+        // Align to grid based on camera
+        this.x = Math.floor((x - camera.x) / 20) * 20 - camera.x;
+        this.y = Math.floor((y - camera.y) / 20) * 20 - camera.y;
+        this.type = type;
+        this.col = col;
+        this.life = life;
+    }
+    // Example method: check if tile is onscreen
+    isOnscreen() {
+        return checkOnscreen(this.x, this.y);
+    }
+    // Example method: draw/update (placeholder)
+    render(ctx) {
+        ctx.fillStyle = this.col === 0 ? "gray" : "red";
+        ctx.fillRect(this.x, this.y, 20, 20);
+    }
+}
+class TileManager {
+    constructor() {
+        this.tiles = [];
+        this.editorType = 1;
+        this.actionEnabled = false;
+    }
+    addTile(x, y, type) {
+        const newTile = new Tile(x, y, type);
+        this.tiles.push(newTile);
+        return newTile;
+    }
+    getTiles() {
+        return this.tiles;
+    }
+    enableAction() {
+        this.actionEnabled = true;
+    }
+    disableAction() {
+        this.actionEnabled = false;
+    }
+}
+export const tileManager = new TileManager();
 
-var editorType = 1;
-var actionEnabled = false;
-
-export var tiles = [];
-
-export function addTile(x, y, type) {
-    const temp = {x: x - camera.x, y: y - camera.y};
-    const newTile = {
-        x: Math.floor(temp.x/20)*20 - camera.x,
-        y: Math.floor(temp.y/20)*20 - camera.y,
-        type: type,
-        col: 0,
-        life: 0
-    };
-    tiles.push(newTile);
-};
 
 // canvas.addEventListener("mousemove", (e) => {
 //     const rect = canvas.getBoundingClientRect();
