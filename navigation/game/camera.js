@@ -1,21 +1,23 @@
+export class Camera {
+  constructor(x = 0, y = 0, zoom = 1, followSpeed = 0.08) {
+      this.x = x;
+      this.y = y;
+      this.zoom = zoom;
+      this.followSpeed = followSpeed;
+      this.target = { x: this.x, y: this.y, zoom: this.zoom };
+  }
 
-export const camera = {
-  x: 0,
-  y: 0,
-  zoom: 1,
-};
+  update() {
+      this.x += this.followSpeed * (this.target.x - this.x);
+      this.y += this.followSpeed * (this.target.y - this.y);
+      this.zoom += this.followSpeed * (this.target.zoom - this.zoom);
+  }
 
- export var followSpeed = 0.08;
-
-export const target = camera;
-
-export function updateCamera() {
-    camera.x += followSpeed * (target.x - camera.x);
-    camera.y += followSpeed * (target.y - camera.y);
-    camera.zoom += followSpeed * (target.zoom - camera.zoom);
-};
-
-export function setCameraTarget(newTarget) {
-    target.x = newTarget.x;
-    target.y = newTarget.y;
-};
+  setTarget(newTarget) {
+      this.target = {
+          x: newTarget.x,
+          y: newTarget.y,
+          zoom: newTarget.zoom ?? this.zoom
+      };
+  }
+}
