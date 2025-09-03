@@ -2,17 +2,18 @@
 layout: base
 title: Game
 ---
-# 🚀 Space Defender Pro – Responsive Controls (JavaScript OOP)
+# 🏃 Rogue Runner – OOP JavaScript Game
 
-Advanced OOP arcade game with smooth, responsive controls.  
-- ⬅️ ➡️ move  
-- SPACE to shoot  
-- Power-ups, levels, high score  
+Medium-complexity vertical runner with obstacles, coins, and power-ups.  
+- Arrow keys / WASD to move  
+- Avoid obstacles, collect coins  
+- OOP structure for all entities  
+- Responsive movement  
 
 
-<canvas id="gameCanvas" width="600" height="600"></canvas>
+<canvas id="gameCanvas" width="500" height="600"></canvas>
 <script>
-  // ======= Base Entity Class =======
+  // ======= Base Entity =======
   class Entity {
     constructor(x, y, width, height, color) {
       this.x = x;
@@ -25,85 +26,75 @@ Advanced OOP arcade game with smooth, responsive controls.
       ctx.fillStyle = this.color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
     }
+    collide(other) {
+      return this.x < other.x + other.width &&
+             this.x + this.width > other.x &&
+             this.y < other.y + other.height &&
+             this.y + this.height > other.y;
+    }
   }
 
   // ======= Player =======
   class Player extends Entity {
     constructor(x, y) {
-      super(x, y, 40, 20, "cyan");
-      this.speed = 8;
-      this.cooldown = 0;
-      this.rapidFire = false;
-      this.shield = false;
+      super(x, y, 40, 40, "cyan");
+      this.speed = 6;
     }
-    move(keys, canvasWidth) {
-      if (keys["ArrowLeft"] && this.x > 0) this.x -= this.speed;
-      if (keys["ArrowRight"] && this.x + this.width < canvasWidth) this.x += this.speed;
-    }
-    canShoot() {
-      const delay = this.rapidFire ? 8 : 20;
-      if (this.cooldown === 0) {
-        this.cooldown = delay;
-        return true;
-      }
-      return false;
-    }
-    updateCooldown() {
-      if (this.cooldown > 0) this.cooldown--;
+    move(keys, canvasWidth, canvasHeight) {
+      if(keys["ArrowLeft"] || keys["a"]) this.x -= this.speed;
+      if(keys["ArrowRight"] || keys["d"]) this.x += this.speed;
+      if(keys["ArrowUp"] || keys["w"]) this.y -= this.speed;
+      if(keys["ArrowDown"] || keys["s"]) this.y += this.speed;
+
+      // Stay inside canvas
+      if(this.x < 0) this.x = 0;
+      if(this.x + this.width > canvasWidth) this.x = canvasWidth - this.width;
+      if(this.y < 0) this.y = 0;
+      if(this.y + this.height > canvasHeight) this.y = canvasHeight - this.height;
     }
   }
 
-  // ======= Bullet =======
-  class Bullet extends Entity {
-    constructor(x, y, color, speed, isEnemy = false) {
-      super(x, y, 5, 10, color);
+  // ======= Obstacle =======
+  class Obstacle extends Entity {
+    constructor(x, y, width, height, speed) {
+      super(x, y, width, height, "red");
       this.speed = speed;
-      this.isEnemy = isEnemy;
     }
     update() { this.y += this.speed; }
   }
 
-  // ======= Enemy Base Class =======
-  class Enemy extends Entity {
-    constructor(x, y, color = "red") {
-      super(x, y, 30, 20, color);
-      this.speed = 2;
+  // ======= Coin =======
+  class Coin extends Entity {
+    constructor(x, y) {
+      super(x, y, 20, 20, "gold");
+      this.speed = 4;
+      this.pulse = 0;
     }
-    update() { this.y += this.speed * 0.2; }
-    shoot(probability = 0.003) {
-      if (Math.random() < probability) return new Bullet(this.x + this.width/2, this.y + this.height, "yellow", 4, true);
-      return null;
-    }
-  }
-
-  // ======= Fast Enemy =======
-  class FastEnemy extends Enemy {
-    constructor(x, y) { super(x, y, "orange"); this.speed = 4; }
-    update() { this.y += this.speed * 0.4; this.x += Math.sin(this.y/20)*3; }
-  }
-
-  // ======= Tank Enemy =======
-  class TankEnemy extends Enemy {
-    constructor(x, y) { super(x, y, "purple"); this.health = 3; }
-    takeHit() { this.health--; return this.health <= 0; }
+    update() { this.y += this.speed; this.pulse += 0.1; }
     draw(ctx) {
       ctx.fillStyle = this.color;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
-      ctx.fillStyle = "white";
-      ctx.font = "12px Arial";
-      ctx.fillText(this.health, this.x + 10, this.y + 15);
+      ctx.beginPath();
+      ctx.arc(this.x + this.width/2, this.y + this.height/2, this.width/2*(1+0.2*Math.sin(this.pulse)), 0, 2*Math.PI);
+      ctx.fill();
     }
   }
 
   // ======= PowerUp =======
   class PowerUp extends Entity {
     constructor(x, y, type) {
-      const colors = { shield: "blue", rapid: "lime", health: "pink" };
-      super(x, y, 15, 15, colors[type]);
+      const colors = { shield: "blue", slow: "lime" };
+      super(x, y, 25, 25, colors[type]);
       this.type = type;
-      this.speed = 2;
+      this.speed = 4;
+      this.pulse = 0;
     }
-    update() { this.y += this.speed; }
+    update() { this.y += this.speed; this.pulse += 0.1; }
+    draw(ctx) {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x + this.width/2, this.y + this.height/2, this.width/2*(1+0.3*Math.sin(this.pulse)), 0, 2*Math.PI);
+      ctx.fill();
+    }
   }
 
   // ======= Game =======
@@ -111,153 +102,116 @@ Advanced OOP arcade game with smooth, responsive controls.
     constructor(canvasId) {
       this.canvas = document.getElementById(canvasId);
       this.ctx = this.canvas.getContext("2d");
-      this.canvas.tabIndex = 1;  // make canvas focusable
-      this.canvas.focus();        // auto-focus
+      this.canvas.tabIndex = 1; this.canvas.focus();
 
       this.keys = {};
-      this.player = new Player(this.canvas.width/2-20, this.canvas.height-40);
-      this.bullets = [];
-      this.enemies = [];
-      this.enemyBullets = [];
-      this.powerUps = [];
-      this.level = 1;
-      this.score = 0;
-      this.health = 3;
-      this.highScore = localStorage.getItem("spaceDefenderHighScore") || 0;
-      this.state = "title";
-
       window.addEventListener("keydown", e => this.keys[e.key] = true);
       window.addEventListener("keyup", e => this.keys[e.key] = false);
+
+      this.player = new Player(this.canvas.width/2 - 20, this.canvas.height - 60);
+      this.obstacles = [];
+      this.coins = [];
+      this.powerUps = [];
+      this.score = 0;
+      this.highScore = localStorage.getItem("rogueRunnerHighScore") || 0;
+      this.gameSpeed = 4;
+      this.spawnTimer = 0;
+      this.state = "title";
 
       requestAnimationFrame(() => this.update());
     }
 
-    start() { this.state = "playing"; this.spawnWave(); }
+    start() { this.state = "playing"; this.score = 0; this.obstacles = []; this.coins = []; this.powerUps = []; this.spawnTimer = 0; this.gameSpeed = 4; }
 
-    reset() {
-      this.state = "title";
-      this.bullets = [];
-      this.enemies = [];
-      this.enemyBullets = [];
-      this.powerUps = [];
-      this.level = 1;
-      this.score = 0;
-      this.health = 3;
-      this.player = new Player(this.canvas.width/2-20, this.canvas.height-40);
-    }
-
-    spawnWave() {
-      for (let i=0;i<6;i++) {
-        for (let j=0;j<this.level;j++) {
-          const rand = Math.random();
-          if (rand<0.2) this.enemies.push(new FastEnemy(80+i*70,40+j*60));
-          else if(rand<0.3) this.enemies.push(new TankEnemy(80+i*70,40+j*60));
-          else this.enemies.push(new Enemy(80+i*70,40+j*60));
-        }
+    spawnEntities() {
+      // Obstacles
+      if(Math.random() < 0.03){
+        const w = 40 + Math.random()*40;
+        this.obstacles.push(new Obstacle(Math.random()*(this.canvas.width - w), -30, w, 20, this.gameSpeed));
       }
-    }
-
-    collision(a,b){
-      return a.x<a.x+b.width && a.x+a.width>b.x && a.y<b.y+b.height && a.y+a.height>b.y;
-    }
-
-    handleInput() {
-      this.player.move(this.keys, this.canvas.width);
-      if (this.keys[" "]) {
-        if (this.player.canShoot()) {
-          this.bullets.push(new Bullet(this.player.x+this.player.width/2-2, this.player.y, "lime", -6));
-        }
+      // Coins
+      if(Math.random() < 0.02){
+        this.coins.push(new Coin(Math.random()*(this.canvas.width - 20), -20));
       }
-    }
-
-    dropPowerUp(x,y){
-      const types=["shield","rapid","health"];
-      const type=types[Math.floor(Math.random()*types.length)];
-      this.powerUps.push(new PowerUp(x,y,type));
-    }
-
-    activatePowerUp(type){
-      if(type==="shield"){ this.player.shield=true; setTimeout(()=>this.player.shield=false,5000);}
-      else if(type==="rapid"){ this.player.rapidFire=true; setTimeout(()=>this.player.rapidFire=false,5000);}
-      else if(type==="health") this.health++;
+      // PowerUps
+      if(Math.random() < 0.005){
+        const types = ["shield","slow"];
+        this.powerUps.push(new PowerUp(Math.random()*(this.canvas.width-25), -25, types[Math.floor(Math.random()*types.length)]));
+      }
     }
 
     update() {
-      this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
-      if(this.state==="title") this.drawTitle();
-      else if(this.state==="playing") {
-        this.handleInput();
-        this.updateGame();
-      } else if(this.state==="gameover") this.drawGameOver();
-      requestAnimationFrame(()=>this.update());
+      // Clear
+      this.ctx.fillStyle = "black";
+      this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+
+      if(this.state === "title") this.drawTitle();
+      else if(this.state === "playing") this.updateGame();
+      else if(this.state === "gameover") this.drawGameOver();
+
+      requestAnimationFrame(() => this.update());
     }
 
     updateGame(){
-      this.player.updateCooldown();
+      this.player.move(this.keys, this.canvas.width, this.canvas.height);
 
-      // Bullets
-      for(let i=this.bullets.length-1;i>=0;i--){
-        const b=this.bullets[i]; b.update(); b.draw(this.ctx);
-        if(b.y<0) this.bullets.splice(i,1);
+      // Spawn
+      this.spawnTimer++;
+      if(this.spawnTimer % 2 === 0) this.spawnEntities(); // spawn entities every 2 frames
+
+      // Obstacles
+      for(let i=this.obstacles.length-1;i>=0;i--){
+        const ob = this.obstacles[i];
+        ob.update(); ob.draw(this.ctx);
+        if(this.player.collide(ob)){ this.state="gameover"; if(this.score>this.highScore){ this.highScore=this.score; localStorage.setItem("rogueRunnerHighScore",this.highScore);} }
+        else if(ob.y>this.canvas.height) this.obstacles.splice(i,1);
       }
 
-      // Enemies
-      for(let i=this.enemies.length-1;i>=0;i--){
-        const e=this.enemies[i]; e.update(); e.draw(this.ctx);
-        const bullet = e.shoot? e.shoot(0.002+this.level*0.001):null;
-        if(bullet) this.enemyBullets.push(bullet);
-        for(let j=this.bullets.length-1;j>=0;j--){
-          if(this.collision(this.bullets[j],e)){
-            if(e instanceof TankEnemy){ if(e.takeHit()){ this.enemies.splice(i,1); if(Math.random()<0.1) this.dropPowerUp(e.x,e.y);} }
-            else { this.enemies.splice(i,1); if(Math.random()<0.1) this.dropPowerUp(e.x,e.y);}
-            this.bullets.splice(j,1); this.score+=50; break;
-          }
-        }
-      }
-
-      // Enemy bullets
-      for(let i=this.enemyBullets.length-1;i>=0;i--){
-        const b=this.enemyBullets[i]; b.update(); b.draw(this.ctx);
-        if(this.collision(b,this.player)){ if(!this.player.shield) this.health--; this.enemyBullets.splice(i,1);}
-        else if(b.y>this.canvas.height) this.enemyBullets.splice(i,1);
+      // Coins
+      for(let i=this.coins.length-1;i>=0;i--){
+        const coin = this.coins[i];
+        coin.update(); coin.draw(this.ctx);
+        if(this.player.collide(coin)){ this.score += 10; this.coins.splice(i,1);}
+        else if(coin.y>this.canvas.height) this.coins.splice(i,1);
       }
 
       // PowerUps
       for(let i=this.powerUps.length-1;i>=0;i--){
-        const p=this.powerUps[i]; p.update(); p.draw(this.ctx);
-        if(this.collision(p,this.player)){ this.activatePowerUp(p.type); this.powerUps.splice(i,1);}
-        else if(p.y>this.canvas.height) this.powerUps.splice(i,1);
+        const p = this.powerUps[i]; p.update(); p.draw(this.ctx);
+        if(this.player.collide(p)){ 
+          if(p.type==="shield"){ this.player.color="blue"; setTimeout(()=>this.player.color="cyan",5000);}
+          else if(p.type==="slow"){ this.gameSpeed=2; setTimeout(()=>this.gameSpeed=4,5000);}
+          this.powerUps.splice(i,1);
+        } else if(p.y>this.canvas.height) this.powerUps.splice(i,1);
       }
 
       // HUD
       this.ctx.fillStyle="white"; this.ctx.font="18px Arial";
       this.ctx.fillText("Score: "+this.score,10,20);
-      this.ctx.fillText("Health: "+this.health,500,20);
-      this.ctx.fillText("Level: "+this.level,270,20);
       this.ctx.fillText("High Score: "+this.highScore,10,50);
 
-      if(this.enemies.length===0){ this.level++; this.spawnWave(); }
-
-      if(this.health<=0){ 
-        this.state="gameover"; 
-        if(this.score>this.highScore){ this.highScore=this.score; localStorage.setItem("spaceDefenderHighScore",this.highScore);}
-      }
+      this.score += 0.1; // score increases over time
     }
 
-    drawTitle(){ 
-      this.ctx.fillStyle="white"; this.ctx.font="36px Arial"; this.ctx.fillText("🚀 Space Defender Pro",130,250);
-      this.ctx.font="24px Arial"; this.ctx.fillText("Press ENTER to Start",190,300);
-      this.ctx.fillText("⬅️ ➡️ to Move, SPACE to Shoot",140,340);
+    drawTitle(){
+      this.ctx.fillStyle="white"; this.ctx.font="36px Arial";
+      this.ctx.fillText("🏃 Rogue Runner",100,250);
+      this.ctx.font="24px Arial";
+      this.ctx.fillText("Press ENTER to Start",150,300);
+      this.ctx.fillText("Arrow keys / WASD to Move",120,340);
+      if(this.keys["Enter"]){ this.start(); }
     }
 
     drawGameOver(){
-      this.ctx.fillStyle="red"; this.ctx.font="36px Arial"; this.ctx.fillText("GAME OVER",200,250);
-      this.ctx.fillStyle="white"; this.ctx.font="24px Arial"; this.ctx.fillText("Final Score: "+this.score,220,300);
-      this.ctx.fillText("Press ENTER to Restart",180,340);
+      this.ctx.fillStyle="red"; this.ctx.font="36px Arial";
+      this.ctx.fillText("GAME OVER",150,250);
+      this.ctx.fillStyle="white"; this.ctx.font="24px Arial";
+      this.ctx.fillText("Final Score: "+Math.floor(this.score),160,300);
+      this.ctx.fillText("Press ENTER to Restart",130,340);
+      if(this.keys["Enter"]){ this.start(); }
     }
   }
 
-  // ======= Start Game =======
   new Game("gameCanvas");
 </script>
 
