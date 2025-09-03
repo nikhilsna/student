@@ -2,13 +2,13 @@
 layout: base
 title: Game
 ---
+# 🚀 Space Defender Pro – Smooth Version (JavaScript OOP)
 
-# 🚀 Space Defender Pro (JavaScript OOP Arcade Game)
-
-Advanced OOP browser game written in JavaScript.  
+Advanced OOP arcade game with smooth controls.  
 - ⬅️ ➡️ move  
-- SPACE shoot  
-- Collect power-ups, defeat waves, and survive as long as possible.  
+- SPACE to shoot  
+- Power-ups, levels, high score.  
+
 
 <canvas id="gameCanvas" width="600" height="600"></canvas>
 <script>
@@ -31,14 +31,15 @@ Advanced OOP browser game written in JavaScript.
   class Player extends Entity {
     constructor(x, y) {
       super(x, y, 40, 20, "cyan");
-      this.speed = 6;
+      this.speed = 8; // higher speed for snappy movement
       this.cooldown = 0;
       this.rapidFire = false;
       this.shield = false;
     }
-    move(keys, canvasWidth) {
-      if (keys["ArrowLeft"] && this.x > 0) this.x -= this.speed;
-      if (keys["ArrowRight"] && this.x + this.width < canvasWidth) this.x += this.speed;
+    move(keys, canvasWidth, speedMultiplier = 1) {
+      const moveSpeed = this.speed * speedMultiplier;
+      if (keys["ArrowLeft"] && this.x > 0) this.x -= moveSpeed;
+      if (keys["ArrowRight"] && this.x + this.width < canvasWidth) this.x += moveSpeed;
     }
     canShoot() {
       let delay = this.rapidFire ? 8 : 20;
@@ -60,8 +61,8 @@ Advanced OOP browser game written in JavaScript.
       this.speed = speed;
       this.isEnemy = isEnemy;
     }
-    update() {
-      this.y += this.speed;
+    update(deltaMultiplier = 1) {
+      this.y += this.speed * deltaMultiplier;
     }
   }
 
@@ -71,8 +72,8 @@ Advanced OOP browser game written in JavaScript.
       super(x, y, 30, 20, color);
       this.speed = 2;
     }
-    update() {
-      this.y += this.speed * 0.2;
+    update(deltaMultiplier = 1) {
+      this.y += this.speed * 0.2 * deltaMultiplier;
     }
     shoot(probability = 0.003) {
       if (Math.random() < probability) {
@@ -82,19 +83,19 @@ Advanced OOP browser game written in JavaScript.
     }
   }
 
-  // ======= Fast Enemy (Polymorphism) =======
+  // ======= Fast Enemy =======
   class FastEnemy extends Enemy {
     constructor(x, y) {
       super(x, y, "orange");
       this.speed = 4;
     }
-    update() {
-      this.y += this.speed * 0.4;
+    update(deltaMultiplier = 1) {
+      this.y += this.speed * 0.4 * deltaMultiplier;
       this.x += Math.sin(this.y / 20) * 3;
     }
   }
 
-  // ======= Tank Enemy (Polymorphism) =======
+  // ======= Tank Enemy =======
   class TankEnemy extends Enemy {
     constructor(x, y) {
       super(x, y, "purple");
@@ -102,18 +103,18 @@ Advanced OOP browser game written in JavaScript.
     }
     takeHit() {
       this.health--;
-      if (this.health <= 0) return true;
-      return false;
+      return this.health <= 0;
     }
     draw(ctx) {
       ctx.fillStyle = this.color;
       ctx.fillRect(this.x, this.y, this.width, this.height);
       ctx.fillStyle = "white";
+      ctx.font = "12px Arial";
       ctx.fillText(this.health, this.x + 10, this.y + 15);
     }
   }
 
-  // ======= Power-Up =======
+  // ======= PowerUp =======
   class PowerUp extends Entity {
     constructor(x, y, type) {
       const colors = { shield: "blue", rapid: "lime", health: "pink" };
@@ -121,8 +122,8 @@ Advanced OOP browser game written in JavaScript.
       this.type = type;
       this.speed = 2;
     }
-    update() {
-      this.y += this.speed;
+    update(deltaMultiplier = 1) {
+      this.y += this.speed * deltaMultiplier;
     }
   }
 
@@ -142,20 +143,16 @@ Advanced OOP browser game written in JavaScript.
       this.health = 3;
       this.highScore = localStorage.getItem("spaceDefenderHighScore") || 0;
       this.state = "title"; // title, playing, gameover
-      this.spawnTimer = 0;
+      this.lastTime = 0;
 
       document.addEventListener("keydown", (e) => {
         this.keys[e.key] = true;
-        if (this.state === "title" && e.key === "Enter") {
-          this.start();
-        }
-        if (this.state === "gameover" && e.key === "Enter") {
-          this.reset();
-        }
+        if (this.state === "title" && e.key === "Enter") this.start();
+        if (this.state === "gameover" && e.key === "Enter") this.reset();
       });
       document.addEventListener("keyup", (e) => this.keys[e.key] = false);
 
-      requestAnimationFrame(() => this.update());
+      requestAnimationFrame((t) => this.update(t));
     }
 
     start() {
@@ -195,49 +192,65 @@ Advanced OOP browser game written in JavaScript.
       );
     }
 
-    update() {
+    handleInput(deltaMultiplier) {
+      this.player.move(this.keys, this.canvas.width, deltaMultiplier);
+      if (this.keys[" "] && this.player.canShoot()) {
+        this.bullets.push(new Bullet(this.player.x + this.player.width/2 - 2, this.player.y, "lime", -6));
+      }
+    }
+
+    dropPowerUp(x, y) {
+      const types = ["shield", "rapid", "health"];
+      const type = types[Math.floor(Math.random()*types.length)];
+      this.powerUps.push(new PowerUp(x, y, type));
+    }
+
+    activatePowerUp(type) {
+      if (type === "shield") {
+        this.player.shield = true;
+        setTimeout(() => this.player.shield = false, 5000);
+      } else if (type === "rapid") {
+        this.player.rapidFire = true;
+        setTimeout(() => this.player.rapidFire = false, 5000);
+      } else if (type === "health") this.health++;
+    }
+
+    update(timestamp) {
+      const delta = timestamp - this.lastTime || 16.67;
+      const deltaMultiplier = delta / 16.67;
+      this.lastTime = timestamp;
+
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       if (this.state === "title") {
         this.drawTitle();
       } else if (this.state === "playing") {
-        this.updateGame();
+        this.handleInput(deltaMultiplier);
+        this.updateGame(deltaMultiplier);
       } else if (this.state === "gameover") {
         this.drawGameOver();
       }
 
-      requestAnimationFrame(() => this.update());
+      requestAnimationFrame((t) => this.update(t));
     }
 
-    updateGame() {
-      // --- Player ---
-      this.player.move(this.keys, this.canvas.width);
-      this.player.draw(this.ctx);
-      this.player.updateCooldown();
-
-      if (this.keys[" "] && this.player.canShoot()) {
-        this.bullets.push(new Bullet(this.player.x + this.player.width/2 - 2, this.player.y, "lime", -6));
-      }
-
-      // --- Bullets ---
+    updateGame(deltaMultiplier) {
+      // Bullets
       for (let i = this.bullets.length - 1; i >= 0; i--) {
         const b = this.bullets[i];
-        b.update();
+        b.update(deltaMultiplier);
         b.draw(this.ctx);
         if (b.y < 0) this.bullets.splice(i, 1);
       }
 
-      // --- Enemies ---
+      // Enemies
       for (let i = this.enemies.length - 1; i >= 0; i--) {
         const e = this.enemies[i];
-        e.update();
+        e.update(deltaMultiplier);
         e.draw(this.ctx);
-
-        // Enemy shooting
         const bullet = e.shoot ? e.shoot(0.002 + this.level*0.001) : null;
         if (bullet) this.enemyBullets.push(bullet);
 
-        // Bullet collisions
         for (let j = this.bullets.length - 1; j >= 0; j--) {
           if (this.collision(this.bullets[j], e)) {
             if (e instanceof TankEnemy) {
@@ -256,10 +269,10 @@ Advanced OOP browser game written in JavaScript.
         }
       }
 
-      // --- Enemy Bullets ---
+      // Enemy bullets
       for (let i = this.enemyBullets.length - 1; i >= 0; i--) {
         const b = this.enemyBullets[i];
-        b.update();
+        b.update(deltaMultiplier);
         b.draw(this.ctx);
         if (this.collision(b, this.player)) {
           if (!this.player.shield) this.health--;
@@ -269,10 +282,10 @@ Advanced OOP browser game written in JavaScript.
         }
       }
 
-      // --- PowerUps ---
+      // PowerUps
       for (let i = this.powerUps.length - 1; i >= 0; i--) {
         const p = this.powerUps[i];
-        p.update();
+        p.update(deltaMultiplier);
         p.draw(this.ctx);
         if (this.collision(p, this.player)) {
           this.activatePowerUp(p.type);
@@ -282,7 +295,7 @@ Advanced OOP browser game written in JavaScript.
         }
       }
 
-      // --- HUD ---
+      // HUD
       this.ctx.fillStyle = "white";
       this.ctx.font = "18px Arial";
       this.ctx.fillText("Score: " + this.score, 10, 20);
@@ -290,37 +303,19 @@ Advanced OOP browser game written in JavaScript.
       this.ctx.fillText("Level: " + this.level, 270, 20);
       this.ctx.fillText("High Score: " + this.highScore, 10, 50);
 
-      // --- Next Level ---
+      // Next level
       if (this.enemies.length === 0) {
         this.level++;
         this.spawnWave();
       }
 
-      // --- Check Game Over ---
+      // Check Game Over
       if (this.health <= 0) {
         this.state = "gameover";
         if (this.score > this.highScore) {
           this.highScore = this.score;
           localStorage.setItem("spaceDefenderHighScore", this.highScore);
         }
-      }
-    }
-
-    dropPowerUp(x, y) {
-      const types = ["shield", "rapid", "health"];
-      const type = types[Math.floor(Math.random()*types.length)];
-      this.powerUps.push(new PowerUp(x, y, type));
-    }
-
-    activatePowerUp(type) {
-      if (type === "shield") {
-        this.player.shield = true;
-        setTimeout(() => this.player.shield = false, 5000);
-      } else if (type === "rapid") {
-        this.player.rapidFire = true;
-        setTimeout(() => this.player.rapidFire = false, 5000);
-      } else if (type === "health") {
-        this.health++;
       }
     }
 
@@ -347,3 +342,4 @@ Advanced OOP browser game written in JavaScript.
   // ======= Start Game =======
   new Game("gameCanvas");
 </script>
+
