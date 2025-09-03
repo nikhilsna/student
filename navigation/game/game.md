@@ -3,373 +3,347 @@ layout: base
 title: Game
 ---
 
-<style>
-    canvas {
-        border: 1px solid #333;
-        background: #b7b7b7ff;
-        display: block;
-        margin: 20px auto;
+# 🚀 Space Defender Pro (JavaScript OOP Arcade Game)
+
+Advanced OOP browser game written in JavaScript.  
+- ⬅️ ➡️ move  
+- SPACE shoot  
+- Collect power-ups, defeat waves, and survive as long as possible.  
+
+<canvas id="gameCanvas" width="600" height="600"></canvas>
+<script>
+  // ======= Base Entity Class =======
+  class Entity {
+    constructor(x, y, width, height, color) {
+      this.x = x;
+      this.y = y;
+      this.width = width;
+      this.height = height;
+      this.color = color;
+    }
+    draw(ctx) {
+      ctx.fillStyle = this.color;
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+  }
+
+  // ======= Player =======
+  class Player extends Entity {
+    constructor(x, y) {
+      super(x, y, 40, 20, "cyan");
+      this.speed = 6;
+      this.cooldown = 0;
+      this.rapidFire = false;
+      this.shield = false;
+    }
+    move(keys, canvasWidth) {
+      if (keys["ArrowLeft"] && this.x > 0) this.x -= this.speed;
+      if (keys["ArrowRight"] && this.x + this.width < canvasWidth) this.x += this.speed;
+    }
+    canShoot() {
+      let delay = this.rapidFire ? 8 : 20;
+      if (this.cooldown === 0) {
+        this.cooldown = delay;
+        return true;
+      }
+      return false;
+    }
+    updateCooldown() {
+      if (this.cooldown > 0) this.cooldown--;
+    }
+  }
+
+  // ======= Bullet =======
+  class Bullet extends Entity {
+    constructor(x, y, color, speed, isEnemy = false) {
+      super(x, y, 5, 10, color);
+      this.speed = speed;
+      this.isEnemy = isEnemy;
+    }
+    update() {
+      this.y += this.speed;
+    }
+  }
+
+  // ======= Enemy Base Class =======
+  class Enemy extends Entity {
+    constructor(x, y, color = "red") {
+      super(x, y, 30, 20, color);
+      this.speed = 2;
+    }
+    update() {
+      this.y += this.speed * 0.2;
+    }
+    shoot(probability = 0.003) {
+      if (Math.random() < probability) {
+        return new Bullet(this.x + this.width/2, this.y + this.height, "yellow", 4, true);
+      }
+      return null;
+    }
+  }
+
+  // ======= Fast Enemy (Polymorphism) =======
+  class FastEnemy extends Enemy {
+    constructor(x, y) {
+      super(x, y, "orange");
+      this.speed = 4;
+    }
+    update() {
+      this.y += this.speed * 0.4;
+      this.x += Math.sin(this.y / 20) * 3;
+    }
+  }
+
+  // ======= Tank Enemy (Polymorphism) =======
+  class TankEnemy extends Enemy {
+    constructor(x, y) {
+      super(x, y, "purple");
+      this.health = 3;
+    }
+    takeHit() {
+      this.health--;
+      if (this.health <= 0) return true;
+      return false;
+    }
+    draw(ctx) {
+      ctx.fillStyle = this.color;
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.fillStyle = "white";
+      ctx.fillText(this.health, this.x + 10, this.y + 15);
+    }
+  }
+
+  // ======= Power-Up =======
+  class PowerUp extends Entity {
+    constructor(x, y, type) {
+      const colors = { shield: "blue", rapid: "lime", health: "pink" };
+      super(x, y, 15, 15, colors[type]);
+      this.type = type;
+      this.speed = 2;
+    }
+    update() {
+      this.y += this.speed;
+    }
+  }
+
+  // ======= Game =======
+  class Game {
+    constructor(canvasId) {
+      this.canvas = document.getElementById(canvasId);
+      this.ctx = this.canvas.getContext("2d");
+      this.keys = {};
+      this.player = new Player(this.canvas.width/2 - 20, this.canvas.height - 40);
+      this.bullets = [];
+      this.enemies = [];
+      this.enemyBullets = [];
+      this.powerUps = [];
+      this.level = 1;
+      this.score = 0;
+      this.health = 3;
+      this.highScore = localStorage.getItem("spaceDefenderHighScore") || 0;
+      this.state = "title"; // title, playing, gameover
+      this.spawnTimer = 0;
+
+      document.addEventListener("keydown", (e) => {
+        this.keys[e.key] = true;
+        if (this.state === "title" && e.key === "Enter") {
+          this.start();
+        }
+        if (this.state === "gameover" && e.key === "Enter") {
+          this.reset();
+        }
+      });
+      document.addEventListener("keyup", (e) => this.keys[e.key] = false);
+
+      requestAnimationFrame(() => this.update());
     }
 
-    /* Shared style for all image buttons */
-    .image-button {
-        width: 200px;
-        height: 60px;
-        background-size: cover;
-        background-position: center;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5em;
-        color: white;
-        text-shadow: 1px 1px 2px black;
-        transition: transform 0.1s;
-        margin: 0.5em 0;
+    start() {
+      this.state = "playing";
+      this.spawnWave();
     }
 
-    .image-button:hover {
-        transform: scale(1.05);
+    reset() {
+      this.state = "title";
+      this.bullets = [];
+      this.enemies = [];
+      this.enemyBullets = [];
+      this.powerUps = [];
+      this.level = 1;
+      this.score = 0;
+      this.health = 3;
+      this.player = new Player(this.canvas.width/2 - 20, this.canvas.height - 40);
     }
 
-    .main-menu {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 800px;
-        height: 600px;
-        background: #eee;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 1;
+    spawnWave() {
+      for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < this.level; j++) {
+          let rand = Math.random();
+          if (rand < 0.2) this.enemies.push(new FastEnemy(80 + i*70, 40 + j*60));
+          else if (rand < 0.3) this.enemies.push(new TankEnemy(80 + i*70, 40 + j*60));
+          else this.enemies.push(new Enemy(80 + i*70, 40 + j*60));
+        }
+      }
     }
 
-    .death-screen {
-        position: absolute;
-        top: 0;
-        left 0;
-        width: 801px;
-        height: 601px;
-        background: rgba(0,0,0,0.8);
-        color: white;
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 2;
+    collision(a, b) {
+      return (
+        a.x < b.x + b.width &&
+        a.x + a.width > b.x &&
+        a.y < b.y + b.height &&
+        a.y + a.height > b.y
+      );
     }
 
-    .upgrade-menu {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 800px;
-        height: 600px;
-        background: #ddd;
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 3;
+    update() {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      if (this.state === "title") {
+        this.drawTitle();
+      } else if (this.state === "playing") {
+        this.updateGame();
+      } else if (this.state === "gameover") {
+        this.drawGameOver();
+      }
+
+      requestAnimationFrame(() => this.update());
     }
 
-    .pause-menu {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 800px;
-        height: 600px;
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 4;
-    }    
-</style>
+    updateGame() {
+      // --- Player ---
+      this.player.move(this.keys, this.canvas.width);
+      this.player.draw(this.ctx);
+      this.player.updateCooldown();
 
-<div style="position:relative; width:800px; height:600px; margin:0 auto;">
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
-    <!-- Main Menu -->
-    <div id="mainMenu" class="main-menu">
-        <h1 style="font-size:3em;margin-bottom:1em;">Dungeon Crawl</h1>
-        <div id="startBtn" class="image-button"></div>
-    </div>
-    <!-- Death Screen -->
-    <div id="deathScreen" class="death-screen">
-        <h1 style="font-size:3em;margin-bottom:1em;">You Died</h1>
-        <div id="restartBtn" class="image-button">Restart</div>
-    </div>
-    <!-- Upgrades Menu -->
-    <div id="upgradeMenu" class="upgrade-menu">
-        <h1 style="font-size:2.5em;margin-bottom:1em;">Upgrades</h1>
-        <div id="upgradeHealth" class="image-button">Increase Health (5 coins)</div>
-        <div id="upgradeSpeed" class="image-button">Increase Speed (5 coins)</div>
-        <div id="closeUpgrades" class="image-button">Back to Game</div>
-    </div>
-    <!-- Pause Menu -->
-    <div id="pauseMenu" class="pause-menu">
-        <h1 style="font-size:3em;margin-bottom:1em;color:white;">Paused</h1>
-        <div id="resumeBtn" class="image-button">Resume</div>
-        <div id="pauseUpgradesBtn" class="image-button">Upgrades</div>
-        <div id="quitBtn" class="image-button">Quit to Main Menu</div>
-    </div>
-</div>
+      if (this.keys[" "] && this.player.canShoot()) {
+        this.bullets.push(new Bullet(this.player.x + this.player.width/2 - 2, this.player.y, "lime", -6));
+      }
 
-<script type="module">
+      // --- Bullets ---
+      for (let i = this.bullets.length - 1; i >= 0; i--) {
+        const b = this.bullets[i];
+        b.update();
+        b.draw(this.ctx);
+        if (b.y < 0) this.bullets.splice(i, 1);
+      }
 
-import { Player } from './move.js';
-import { Camera } from './camera.js';
-import { TileManager } from './tile.js';
-import { checkOnscreen } from './screen.js';
-import { GameObject } from './collide.js';
-import { Enemy } from './enemy.js';
-import { Bullet } from './bullet.js';
+      // --- Enemies ---
+      for (let i = this.enemies.length - 1; i >= 0; i--) {
+        const e = this.enemies[i];
+        e.update();
+        e.draw(this.ctx);
 
-const player = new Player();
-const camera = new Camera();
-const tileManager = new TileManager();
-const detect = new GameObject();
-const enemy = new Enemy();
-const bullet = new Bullet();
+        // Enemy shooting
+        const bullet = e.shoot ? e.shoot(0.002 + this.level*0.001) : null;
+        if (bullet) this.enemyBullets.push(bullet);
 
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-
-const mainMenu = document.getElementById('mainMenu');
-const startBtn = document.getElementById('startBtn');
-
-const deathScreen = document.getElementById('deathScreen');
-const restartBtn = document.getElementById('restartBtn');
-
-const upgradeMenu = document.getElementById('upgradeMenu');
-const upgradeHealthBtn = document.getElementById('upgradeHealth');
-const upgradeSpeedBtn = document.getElementById('upgradeSpeed');
-const closeUpgradesBtn = document.getElementById('closeUpgrades');
-
-const pauseMenu = document.getElementById('pauseMenu');
-const resumeBtn = document.getElementById('resumeBtn');
-const pauseUpgradesBtn = document.getElementById('pauseUpgradesBtn');
-const quitBtn = document.getElementById('quitBtn');
-
-let gameStarted = false;
-let gameOver = false;
-let paused = false;
-let playTime = 0;
-
-// Set custom images for buttons
-startBtn.style.backgroundImage = "url('./art/start.png')";
-restartBtn.style.backgroundImage = "url('images/restart.png')";
-upgradeHealthBtn.style.backgroundImage = "url('images/health.png')";
-upgradeSpeedBtn.style.backgroundImage = "url('images/speed.png')";
-closeUpgradesBtn.style.backgroundImage = "url('images/back.png')";
-resumeBtn.style.backgroundImage = "url('images/resume.png')";
-pauseUpgradesBtn.style.backgroundImage = "url('images/upgrades.png')";
-quitBtn.style.backgroundImage = "url('images/quit.png')";
-
-// --- Main Menu ---
-startBtn.addEventListener('click', () => {
-    mainMenu.style.display = 'none';
-    gameStarted = true;
-    update();
-    spawnTiles(2);
-});
-
-// --- Death Screen ---
-restartBtn.addEventListener('click', () => {
-    deathScreen.style.display = 'none';
-    resetGame();
-    update();
-    spawnTiles(2);
-});
-
-// --- Upgrades ---
-upgradeHealthBtn.addEventListener('click', () => {
-    if (player.coins >= 5) {
-        player.coins -= 5;
-        player.health += 20;
-    }
-});
-upgradeSpeedBtn.addEventListener('click', () => {
-    if (player.coins >= 5) {
-        player.coins -= 5;
-        player.speed += 0.2;
-    }
-});
-closeUpgradesBtn.addEventListener('click', () => {
-    upgradeMenu.style.display = 'none';
-    paused = false;
-    update();
-});
-
-// --- Pause Menu ---
-resumeBtn.addEventListener('click', () => {
-    paused = false;
-    pauseMenu.style.display = 'none';
-    update();
-});
-pauseUpgradesBtn.addEventListener('click', () => {
-    pauseMenu.style.display = 'none';
-    upgradeMenu.style.display = 'flex';
-});
-quitBtn.addEventListener('click', () => {
-    paused = false;
-    gameStarted = false;
-    pauseMenu.style.display = 'none';
-    mainMenu.style.display = 'flex';
-    resetGame();
-});
-
-// --- Game Logic ---
-function resetGame() {
-    player.x = 0;
-    player.y = 0;
-    player.xv = 0;
-    player.yv = 0;
-    player.health = 100;
-    player.coins = 0;
-    gameOver = false;
-    enemies.length = 0;
-    tiles.length = 0;
-    playTime = 0;
-};
-
-const keys = {};
-function keysDetection() {
-    if (keys["w"] || keys["ArrowUp"]) player.yv -= player.speed;
-    if (keys["s"] || keys["ArrowDown"]) player.yv += player.speed;
-    if (keys["a"] || keys["ArrowLeft"]) player.xv -= player.speed;
-    if (keys["d"] || keys["ArrowRight"]) player.xv += player.speed;
-}
-
-function drawText() {
-    ctx.font = '24px Arial';
-    ctx.fillStyle = 'black';
-    ctx.fillText('Health: ' + player.health, 20, 40);
-    ctx.fillText('Coins: ' + player.coins, 20, 68);
-    ctx.fillText('[U] Upgrades', 20, 96);
-}
-
-function drawTiles(width,height) {
-    for (let i = 0; i < tiles.length; i++) {
-        const t = tiles[i];
-        if (t.life === 0) {
-            t.life += 0.1;
-            if (t.life >= 100) {
-                tiles.splice(i,1);
-                i--;
-                continue;
+        // Bullet collisions
+        for (let j = this.bullets.length - 1; j >= 0; j--) {
+          if (this.collision(this.bullets[j], e)) {
+            if (e instanceof TankEnemy) {
+              if (e.takeHit()) {
+                this.enemies.splice(i, 1);
+                if (Math.random() < 0.1) this.dropPowerUp(e.x, e.y);
+              }
+            } else {
+              this.enemies.splice(i, 1);
+              if (Math.random() < 0.1) this.dropPowerUp(e.x, e.y);
             }
+            this.bullets.splice(j, 1);
+            this.score += 50;
+            break;
+          }
         }
-        if (t.type === 2) {
-            addEnemy(t.x, t.y);
-            tiles.splice(i,1);
-            i--;
+      }
+
+      // --- Enemy Bullets ---
+      for (let i = this.enemyBullets.length - 1; i >= 0; i--) {
+        const b = this.enemyBullets[i];
+        b.update();
+        b.draw(this.ctx);
+        if (this.collision(b, this.player)) {
+          if (!this.player.shield) this.health--;
+          this.enemyBullets.splice(i, 1);
+        } else if (b.y > this.canvas.height) {
+          this.enemyBullets.splice(i, 1);
         }
-        if (checkOnscreen(t.x, t.y, width, height)) {
-            if (t.type === 1) {
-                if (updCollide(player,t,20)) {
-                    pointAt(t.x,t.y);
-                    move(distance(0,0,player.xv,player.yv));
-                }
-                ctx.fillStyle = 'black';
-                ctx.fillRect((t.x-camera.x) + (canvas.width/2)-10, (t.y-camera.y) + (canvas.height/2)-10, 20, 20);
-            } else if (t.type === 3) {
-                if (updCollide(player,t,20)) {
-                    player.coins += 1;
-                    tiles.splice(i,1);
-                    i--;
-                }
-                ctx.fillStyle = 'yellow';
-                ctx.fillRect((t.x-camera.x) + (canvas.width/2)-5, (t.y-camera.y) + (canvas.height/2)-5, 10, 10);
-            }
+      }
+
+      // --- PowerUps ---
+      for (let i = this.powerUps.length - 1; i >= 0; i--) {
+        const p = this.powerUps[i];
+        p.update();
+        p.draw(this.ctx);
+        if (this.collision(p, this.player)) {
+          this.activatePowerUp(p.type);
+          this.powerUps.splice(i, 1);
+        } else if (p.y > this.canvas.height) {
+          this.powerUps.splice(i, 1);
         }
-    }
-}
+      }
 
-function wait(seconds) {
-    return new Promise(resolve => setTimeout(resolve, seconds * 1000));
-}
+      // --- HUD ---
+      this.ctx.fillStyle = "white";
+      this.ctx.font = "18px Arial";
+      this.ctx.fillText("Score: " + this.score, 10, 20);
+      this.ctx.fillText("Health: " + this.health, 500, 20);
+      this.ctx.fillText("Level: " + this.level, 270, 20);
+      this.ctx.fillText("High Score: " + this.highScore, 10, 50);
 
-async function spawnTiles(waitTime) {
-    while(true) {
-        await wait(waitTime-(playTime/1000));
-        let rand = (Math.random()*2)-1;
-        const temp = {
-            x: Math.floor(rand*(canvas.width/2-20)+camera.x),
-            y: Math.floor(rand*(canvas.height/2-20)+camera.y),
-        };
-        const t = Math.floor(Math.random() * 2) + 1;
-        addTile(temp.x,temp.y,Math.floor(t));
-    }
-}
+      // --- Next Level ---
+      if (this.enemies.length === 0) {
+        this.level++;
+        this.spawnWave();
+      }
 
-function border(width,height) {
-    if (Math.abs(player.x) >= width) {
-        player.x = player.x > 0 ? -width : width;
-    }
-    if (Math.abs(player.y) >= height) {
-        player.y = player.y > 0 ? -height : height;
-    }
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 4;
-    ctx.strokeRect(6 - camera.x, 6 - camera.y, canvas.width-14, canvas.height-14);
-}
-
-function update() {
-    if (gameOver || paused) return;
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    setCameraTarget(player);
-    updateCamera();
-    playTime += 0.1;
-    drawTiles(canvas.width, canvas.height);
-    updEnemies(ctx, canvas, player);
-    updBullets(ctx, canvas);
-    keysDetection();
-    player.xv *= 0.9;
-    player.yv *= 0.9;
-    player.x += player.xv;
-    player.y += player.yv;
-    border(canvas.width/2 - 20, canvas.height/2 - 20);
-    if (player.health <= 0) {
-        player.health = 0;
-        gameOver = true;
-        deathScreen.style.display = 'flex';
-        return;
-    }
-    ctx.fillStyle = 'blue';
-    ctx.fillRect((player.x-camera.x)+(canvas.width/2)-12.5,(player.y-camera.y)+(canvas.height/2)-12.5,25,25);
-    drawText();
-    requestAnimationFrame(update);
-}
-
-// --- Input ---
-document.addEventListener('keydown', (e) => {
-    if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)) e.preventDefault();
-    keys[e.key.toLowerCase()] = true;
-
-    if (e.key.toLowerCase() === 'u' && gameStarted && !gameOver) {
-        paused = true;
-        upgradeMenu.style.display = 'flex';
+      // --- Check Game Over ---
+      if (this.health <= 0) {
+        this.state = "gameover";
+        if (this.score > this.highScore) {
+          this.highScore = this.score;
+          localStorage.setItem("spaceDefenderHighScore", this.highScore);
+        }
+      }
     }
 
-    if (e.key === 'Escape' && gameStarted && !gameOver) {
-        paused = !paused;
-        pauseMenu.style.display = paused ? 'flex' : 'none';
-        if (!paused) update();
+    dropPowerUp(x, y) {
+      const types = ["shield", "rapid", "health"];
+      const type = types[Math.floor(Math.random()*types.length)];
+      this.powerUps.push(new PowerUp(x, y, type));
     }
-});
-document.addEventListener('keyup', (e) => keys[e.key.toLowerCase()] = false);
 
-canvas.addEventListener("click", (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const worldX = (mouseX - canvas.width/2) + camera.x;
-    const worldY = (mouseY - canvas.height/2) + camera.y;
-    if (player.ammo <= 0) return;
-    shootBullet(worldX, worldY, player.gun);
-});
+    activatePowerUp(type) {
+      if (type === "shield") {
+        this.player.shield = true;
+        setTimeout(() => this.player.shield = false, 5000);
+      } else if (type === "rapid") {
+        this.player.rapidFire = true;
+        setTimeout(() => this.player.rapidFire = false, 5000);
+      } else if (type === "health") {
+        this.health++;
+      }
+    }
+
+    drawTitle() {
+      this.ctx.fillStyle = "white";
+      this.ctx.font = "36px Arial";
+      this.ctx.fillText("🚀 Space Defender Pro", 130, 250);
+      this.ctx.font = "24px Arial";
+      this.ctx.fillText("Press ENTER to Start", 190, 300);
+      this.ctx.fillText("⬅️ ➡️ to Move, SPACE to Shoot", 140, 340);
+    }
+
+    drawGameOver() {
+      this.ctx.fillStyle = "red";
+      this.ctx.font = "36px Arial";
+      this.ctx.fillText("GAME OVER", 200, 250);
+      this.ctx.fillStyle = "white";
+      this.ctx.font = "24px Arial";
+      this.ctx.fillText("Final Score: " + this.score, 220, 300);
+      this.ctx.fillText("Press ENTER to Restart", 180, 340);
+    }
+  }
+
+  // ======= Start Game =======
+  new Game("gameCanvas");
 </script>
