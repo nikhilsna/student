@@ -70,7 +70,7 @@ hide: true
     canvas.addEventListener('mouseup', () => isDragging=false);
     canvas.addEventListener('mouseout', () => isDragging=false);
     canvas.addEventListener('wheel', e => {
-        cameraRadius += e.deltaY*0.0001*cameraRadius;
+        cameraRadius += e.deltaY*0.0005*cameraRadius;
         cameraRadius = Math.max(10,cameraRadius);
     });
 

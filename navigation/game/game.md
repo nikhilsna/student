@@ -119,13 +119,14 @@ title: Game
 </div>
 
 <script type="module">
-import { player, pointAt, move } from './move.js';
-import { camera, updateCamera, setCameraTarget } from './camera.js';
-import { tiles, addTile } from './tile.js';
+
+import { Player } from './move.js';
+import { Camera } from './camera.js';
+import { TileManager } from './tile.js';
 import { checkOnscreen } from './screen.js';
-import { distance, updCollide } from './collide.js';
-import { enemy, enemies, addEnemy, updEnemies } from './enemy.js';
-import { bullets, updBullets, shootBullet } from './bullet.js';
+import { GameObject } from './collide.js';
+import { Enemy } from './enemy.js';
+import { Bullet } from './bullet.js';
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');

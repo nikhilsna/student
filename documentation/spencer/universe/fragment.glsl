@@ -34,7 +34,7 @@ void main() {
         if(d < smoothRadiusThreshold * 10.0) {
             float falloff = exp(-d*d/(radius*radius));
             color += vec3(1.0) * falloff * intensity;
-        } else if(d < smoothRadiusThreshold * -1.0) { 
+        } else if(d < smoothRadiusThreshold * 4.0) { 
             if(d < smallCircleRadius) {
                 color += vec3(1.0);
             }
