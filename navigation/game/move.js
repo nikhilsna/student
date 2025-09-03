@@ -1,4 +1,6 @@
-import { camera } from './camera.js';
+import { Camera } from './camera.js';
+
+const camera = new Camera();
 
 export class Player {
     constructor() {

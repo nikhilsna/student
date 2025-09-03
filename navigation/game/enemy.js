@@ -1,8 +1,12 @@
 import { Player } from './move.js';
 import { GameObject } from './collide.js';
-import { camera } from './camera.js';
-import { bullets } from './bullet.js';
+import { Camera } from './camera.js';
+import { Bullet } from './bullet.js';
 import { checkOnscreen } from './screen.js';
+
+const player = new Player();
+const camera = new Camera();
+const bullets = Bullet.bullets;
 
 export class Enemy {
     constructor(x, y, speed = 0.2, health = 100) {
