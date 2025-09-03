@@ -117,7 +117,7 @@ hide: true
         if(!program) return;
         gl.useProgram(program);
 
-        const physics = new PhysicsEngine(2000);
+        const physics = new PhysicsEngine(1000);
 
         // Fullscreen quad
         const quadVerts = new Float32Array([-1,-1, 1,-1, -1,1, 1,1]);

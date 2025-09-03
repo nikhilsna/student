@@ -160,15 +160,13 @@ export class PhysicsEngine {
 
                 let force = this.G * pi.mass * pj.mass / distSq;
 
+                if (dist < pi.radius + pj.radius) {
+                    // force *= -0.1;
+                }
+
                 ax += force * dx / dist;
                 ay += force * dy / dist;
                 az += force * dz / dist;
-
-                if (dist < pi.radius + pj.radius) {
-                    pi.vel[0] *= 0.95;
-                    pi.vel[1] *= 0.95;
-                    pi.vel[2] *= 0.95;
-                }
             }
 
             pi.vel[0] += ax/pi.mass * this.dt;
@@ -182,12 +180,12 @@ export class PhysicsEngine {
             p.pos[2] += p.vel[2] * this.dt;
 
             const speed = Math.sqrt(p.vel[0]**2 + p.vel[1]**2 + p.vel[2]**2);
-            p.temp += speed * 10000 + 2000;
+            p.temp = 5 / (this.closest * 0.1);
             p.color = p.tempToColor(p.temp);
         }
     }
 
-    // render-safe getter
+    // render safe getter
     getParticles() {
         return this.particles;
     }

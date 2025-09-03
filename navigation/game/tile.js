@@ -1,7 +1,9 @@
 
 // tile.js
-import { camera } from './camera.js';
+import { Camera } from './camera.js';
 import { checkOnscreen } from './screen.js';
+
+const camera = new Camera();
 
 class Tile {
     constructor(x, y, type, col = 0, life = 0) {

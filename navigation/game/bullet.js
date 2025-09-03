@@ -1,6 +1,9 @@
-import { player, pointAt } from './move.js';
-import { camera } from './camera.js';
+import { Player } from './move.js';
+import { Camera } from './camera.js';
 import { checkOnscreen } from './screen.js';
+
+const player = new Player();
+const camera = new Camera();
 
 export class Bullet {
     static bullets = []; // holds all active bullets

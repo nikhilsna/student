@@ -128,6 +128,13 @@ import { GameObject } from './collide.js';
 import { Enemy } from './enemy.js';
 import { Bullet } from './bullet.js';
 
+const player = new Player();
+const camera = new Camera();
+const tileManager = new TileManager();
+const detect = new GameObject();
+const enemy = new Enemy();
+const bullet = new Bullet();
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 

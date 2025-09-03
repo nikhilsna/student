@@ -15,10 +15,10 @@ void main() {
     vec2 uv = vUV;
     uv.x = (uv.x - 0.5) * uAspect + 0.5;
 
-    float smallCircleRadius = 0.005;  // radius of far particles
-    float smoothRadiusThreshold = 0.02; // within this radius use smooth glow
+    float smallCircleRadius = 0.005;
+    float smoothRadiusThreshold = 0.02;
 
-    for(int i = 0; i < 2000; i++) {
+    for(int i = 0; i < 1000; i++) {
         if(i >= uParticleCount) break;
 
         float fx = (mod(float(i), float(uTexSize)) + 0.5) / float(uTexSize);
@@ -34,15 +34,12 @@ void main() {
         if(d < smoothRadiusThreshold * 10.0) {
             float falloff = exp(-d*d/(radius*radius));
             color += vec3(1.0) * falloff * intensity;
-        } else if(d < smoothRadiusThreshold * 4.0) { 
-            if(d < smallCircleRadius) {
-                color += vec3(1.0);
-            }
+        } else if (d < smallCircleRadius * 0.1) {
+            color += intensity;
         }
     }
 
-    color = min(color, vec3(1.0));
-    color = max(vec3(0.0), color);
+    color = clamp(color, 0.0, 1.0);
 
     gl_FragColor = vec4(color, 1.0);
 }
