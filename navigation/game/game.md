@@ -2,13 +2,13 @@
 layout: base
 title: Game
 ---
-# 🏃 Rogue Runner – OOP JavaScript Game
+# 🏃 Rogue Runner – Fully Responsive OOP Game
 
 Medium-complexity vertical runner with obstacles, coins, and power-ups.  
 - Arrow keys / WASD to move  
 - Avoid obstacles, collect coins  
 - OOP structure for all entities  
-- Responsive movement  
+- Fully responsive movement, works in all browsers  
 
 
 <canvas id="gameCanvas" width="500" height="600"></canvas>
@@ -46,7 +46,7 @@ Medium-complexity vertical runner with obstacles, coins, and power-ups.
       if(keys["ArrowUp"] || keys["w"]) this.y -= this.speed;
       if(keys["ArrowDown"] || keys["s"]) this.y += this.speed;
 
-      // Stay inside canvas
+      // Keep player inside canvas
       if(this.x < 0) this.x = 0;
       if(this.x + this.width > canvasWidth) this.x = canvasWidth - this.width;
       if(this.y < 0) this.y = 0;
@@ -102,12 +102,21 @@ Medium-complexity vertical runner with obstacles, coins, and power-ups.
     constructor(canvasId) {
       this.canvas = document.getElementById(canvasId);
       this.ctx = this.canvas.getContext("2d");
-      this.canvas.tabIndex = 1; this.canvas.focus();
 
+      // Make canvas focusable for key input
+      this.canvas.tabIndex = 1;
+      this.canvas.style.outline = "none";
+      this.canvas.focus();
+
+      // Global key tracking
       this.keys = {};
       window.addEventListener("keydown", e => this.keys[e.key] = true);
       window.addEventListener("keyup", e => this.keys[e.key] = false);
 
+      // Click to focus for browsers that block keyboard until click
+      this.canvas.addEventListener("click", () => this.canvas.focus());
+
+      // Initialize game
       this.player = new Player(this.canvas.width/2 - 20, this.canvas.height - 60);
       this.obstacles = [];
       this.coins = [];
@@ -121,7 +130,17 @@ Medium-complexity vertical runner with obstacles, coins, and power-ups.
       requestAnimationFrame(() => this.update());
     }
 
-    start() { this.state = "playing"; this.score = 0; this.obstacles = []; this.coins = []; this.powerUps = []; this.spawnTimer = 0; this.gameSpeed = 4; }
+    start() {
+      this.state = "playing";
+      this.score = 0;
+      this.obstacles = [];
+      this.coins = [];
+      this.powerUps = [];
+      this.spawnTimer = 0;
+      this.gameSpeed = 4;
+      this.player.x = this.canvas.width/2 - 20;
+      this.player.y = this.canvas.height - 60;
+    }
 
     spawnEntities() {
       // Obstacles
@@ -141,7 +160,7 @@ Medium-complexity vertical runner with obstacles, coins, and power-ups.
     }
 
     update() {
-      // Clear
+      // Clear screen
       this.ctx.fillStyle = "black";
       this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
 
@@ -152,22 +171,27 @@ Medium-complexity vertical runner with obstacles, coins, and power-ups.
       requestAnimationFrame(() => this.update());
     }
 
-    updateGame(){
+    updateGame() {
       this.player.move(this.keys, this.canvas.width, this.canvas.height);
 
-      // Spawn
+      // Spawn entities every frame
       this.spawnTimer++;
-      if(this.spawnTimer % 2 === 0) this.spawnEntities(); // spawn entities every 2 frames
+      if(this.spawnTimer % 2 === 0) this.spawnEntities();
 
-      // Obstacles
+      // Update obstacles
       for(let i=this.obstacles.length-1;i>=0;i--){
         const ob = this.obstacles[i];
         ob.update(); ob.draw(this.ctx);
-        if(this.player.collide(ob)){ this.state="gameover"; if(this.score>this.highScore){ this.highScore=this.score; localStorage.setItem("rogueRunnerHighScore",this.highScore);} }
-        else if(ob.y>this.canvas.height) this.obstacles.splice(i,1);
+        if(this.player.collide(ob)){
+          this.state="gameover";
+          if(this.score>this.highScore){
+            this.highScore=this.score;
+            localStorage.setItem("rogueRunnerHighScore",this.highScore);
+          }
+        } else if(ob.y>this.canvas.height) this.obstacles.splice(i,1);
       }
 
-      // Coins
+      // Update coins
       for(let i=this.coins.length-1;i>=0;i--){
         const coin = this.coins[i];
         coin.update(); coin.draw(this.ctx);
@@ -175,7 +199,7 @@ Medium-complexity vertical runner with obstacles, coins, and power-ups.
         else if(coin.y>this.canvas.height) this.coins.splice(i,1);
       }
 
-      // PowerUps
+      // Update power-ups
       for(let i=this.powerUps.length-1;i>=0;i--){
         const p = this.powerUps[i]; p.update(); p.draw(this.ctx);
         if(this.player.collide(p)){ 
@@ -185,19 +209,19 @@ Medium-complexity vertical runner with obstacles, coins, and power-ups.
         } else if(p.y>this.canvas.height) this.powerUps.splice(i,1);
       }
 
-      // HUD
+      // Draw HUD
       this.ctx.fillStyle="white"; this.ctx.font="18px Arial";
-      this.ctx.fillText("Score: "+this.score,10,20);
+      this.ctx.fillText("Score: "+Math.floor(this.score),10,20);
       this.ctx.fillText("High Score: "+this.highScore,10,50);
 
-      this.score += 0.1; // score increases over time
+      this.score += 0.1; // incremental score
     }
 
     drawTitle(){
       this.ctx.fillStyle="white"; this.ctx.font="36px Arial";
       this.ctx.fillText("🏃 Rogue Runner",100,250);
       this.ctx.font="24px Arial";
-      this.ctx.fillText("Press ENTER to Start",150,300);
+      this.ctx.fillText("Press ENTER or Click to Start",80,300);
       this.ctx.fillText("Arrow keys / WASD to Move",120,340);
       if(this.keys["Enter"]){ this.start(); }
     }
@@ -207,11 +231,12 @@ Medium-complexity vertical runner with obstacles, coins, and power-ups.
       this.ctx.fillText("GAME OVER",150,250);
       this.ctx.fillStyle="white"; this.ctx.font="24px Arial";
       this.ctx.fillText("Final Score: "+Math.floor(this.score),160,300);
-      this.ctx.fillText("Press ENTER to Restart",130,340);
+      this.ctx.fillText("Press ENTER or Click to Restart",80,340);
       if(this.keys["Enter"]){ this.start(); }
     }
   }
 
   new Game("gameCanvas");
 </script>
+
 
