@@ -48,7 +48,7 @@ void main() {
     vec2 uv = vUV;
     uv.x = (uv.x - 0.5) * uAspect + 0.5;
 
-    for(int i = 0; i < 8000; i++) {
+    for(int i = 0; i < 2000; i++) {
         if(i >= uParticleCount) break;
 
         // Get particle data from texture
@@ -61,12 +61,12 @@ void main() {
         float d = distance(uv, pos);
         float radius = 0.002;
 
-        float intensity = data.w * 2.0;
+        float intensity = data.w * 100.0;
 
         float edge = 0.002;
         float circle = smoothstep(radius, radius - edge, d);
 
-        float falloff = exp(-d*d/(radius*radius*200.0));
+        float falloff = exp(-d*d/(radius*radius*4000.0));
         color += tempToColor(intensity) * (circle + falloff*intensity);
     }
 

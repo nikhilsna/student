@@ -4,7 +4,7 @@ export class Particle {
         this.pos = pos;
         this.vel = vel;
         this.radius = radius;
-        this.initMass = radius;
+        this.initMass = 400.0;
         this.mass = this.initMass;
         this.temp = temp;
         this.color = this.tempToColor(temp);
@@ -143,7 +143,7 @@ class Octree {
 export class PhysicsEngine {
     constructor(numParticles = 1000) {
         // Physical params
-        this.G = 6.676e-1;
+        this.G = 100.0;
         this.c = 3e8;
         this.dt = 1;
         this.softening2 = 1.0;
@@ -201,8 +201,7 @@ export class PhysicsEngine {
             const t = Math.random() * 10000 + 1000;
             this.temp[i] = t;
 
-            // Create a Particle object whose fields are backed by views into our buffers.
-            // This preserves output type while avoiding duplication.
+
             const posView = this.pos.subarray(base, base + 3);
             const velView = this.vel.subarray(base, base + 3);
             const p = new Particle(posView, velView, r, t);
@@ -265,10 +264,9 @@ export class PhysicsEngine {
 
         const dist2 = dx * dx + dy * dy + dz * dz + this.softening2;
 
-        // If this node is sufficiently far away, approximate as a single mass
+
         const hs = node.halfSize;
-        // Opening criterion: s / d < theta  =>  (hs * 2) / sqrt(dist2) < theta
-        // Compare squared to avoid sqrt: ( (2*hs)^2 ) / dist2 < theta^2
+
         const open2 = (4 * hs * hs) / dist2;
         if (!node.children || open2 < this.theta * this.theta) {
             const sqDist = Math.sqrt(dist2);
@@ -321,15 +319,15 @@ export class PhysicsEngine {
             const b = 3 * i;
 
             // Integrate velocity first, then position (better stability)
-            vel[b]     += f[0] * invMi * dt;
+            vel[b] += f[0] * invMi * dt;
             vel[b + 1] += f[1] * invMi * dt;
             vel[b + 2] += f[2] * invMi * dt;
 
-            vel[b]     *= 0.99;
-            vel[b + 1] *= 0.99;
-            vel[b + 2] *= 0.99;
+            // vel[b] *= 0.99;
+            // vel[b + 1] *= 0.99;
+            // vel[b + 2] *= 0.99;
 
-            pos[b]     += vel[b]     * dt;
+            pos[b] += vel[b] * dt;
             pos[b + 1] += vel[b + 1] * dt;
             pos[b + 2] += vel[b + 2] * dt;
 
