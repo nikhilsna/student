@@ -10,7 +10,7 @@ Click the moles or press number keys (1–9) to score.
 - Increasing difficulty over time  
 - Fully OOP Game  
 
-<a href="{{site.baseurl}}/https://ahaanv19.github.io/student/lessons/oriented">Lesson</a>
+<a href="{{site.baseurl}}/lessons/oriented">Lesson</a>
 
 Information:
 
