@@ -1,4 +1,3 @@
-
 import {camera} from './camera.js';
 
 export function checkOnscreen(x, y, width, height) {
